@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+# Extras
+cmake-build-debug
+cmake-build-release
+.idea
+*.swp
+*.bmp
