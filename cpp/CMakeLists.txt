@@ -4,12 +4,12 @@ project(wseink_cpp)
 
 set(CMAKE_CXX_STANDARD 14)
 
-#add_definitions(-DUSE_WIRINGPI_LIB=1)
-add_definitions(-DUSE_DEV_COUT=1)
+add_definitions(-DUSE_WIRINGPI_LIB=1)
+#add_definitions(-DUSE_DEV_COUT=1)
 add_definitions(-DRPI=1)
 add_definitions(-DCMAKE_VERBOSE_MAKEFILE:BOOL=ON)
 
-#find_library(wiringPi_LIB wiringPi)
+find_library(wiringPi_LIB wiringPi)
 
 # set_source_files_properties(*.c PROPERTIES LANGUAGE CXX )
 
@@ -29,19 +29,19 @@ set(EINK_SRCS
     ../c/lib/Config/sysfs_software_spi.c
     ../c/lib/Config/sysfs_software_spi.h
 
-    ../c/lib/Fonts/font8.c
-    ../c/lib/Fonts/font12.c
-    ../c/lib/Fonts/font12CN.c
-    ../c/lib/Fonts/font16.c
-    ../c/lib/Fonts/font20.c
-    ../c/lib/Fonts/font24.c
-    ../c/lib/Fonts/font24CN.c
-    ../c/lib/Fonts/fonts.h
+#    ../c/lib/Fonts/font8.c
+#    ../c/lib/Fonts/font12.c
+#    ../c/lib/Fonts/font12CN.c
+#    ../c/lib/Fonts/font16.c
+#    ../c/lib/Fonts/font20.c
+#    ../c/lib/Fonts/font24.c
+#    ../c/lib/Fonts/font24CN.c
+#    ../c/lib/Fonts/fonts.h
 
-    ../c/lib/GUI/GUI_BMPfile.c
-    ../c/lib/GUI/GUI_BMPfile.h
-    ../c/lib/GUI/GUI_Paint.c
-    ../c/lib/GUI/GUI_Paint.h
+#    ../c/lib/GUI/GUI_BMPfile.c
+#    ../c/lib/GUI/GUI_BMPfile.h
+#    ../c/lib/GUI/GUI_Paint.c
+#    ../c/lib/GUI/GUI_Paint.h
 )
 
 

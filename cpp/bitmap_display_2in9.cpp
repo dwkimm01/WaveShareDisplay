@@ -88,7 +88,7 @@ bitmap_image bitmap_display_2in9::create_image()
     bitmap_image b
         ( width_pixels()
         , height_pixels()
-        , bitmap_image::ROT_0
+        , bitmap_image::ROT_90
         , bitmap_image::CWHITE
         );
     return b;
