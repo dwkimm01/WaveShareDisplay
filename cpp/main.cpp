@@ -22,6 +22,26 @@ int main(int argc, char* argv[])
     //for(int i = 0; i < m; ++i)
     //   b.set(i, i, 1);
 
+    // Display circle in upper left
+    for(size_t x = 0; x < 10; ++x)
+    {
+        for(size_t y = 0; y < 10; ++y)
+        {
+            const size_t x_center {5};
+            const size_t y_center {5};
+            const size_t radius {5};
+
+            if(radius > sqrt(
+                pow(x_center - x, 2) + pow(y_center - y, 2)
+                ))
+            {
+                b.set(x, y, 1);
+            }
+        }
+    }
+
+
+    // Display box in lower right
     for(size_t x = b.image_width_pixels()-10; x < b.image_width_pixels(); ++x)
     {
        for(size_t y = b.image_height_pixels()-10; y < b.image_height_pixels(); ++y)
@@ -29,6 +49,7 @@ int main(int argc, char* argv[])
           b.set(x, y, 1);
        }
     }
+
 
 /*
     for(int x = 0; x < b.image_width_pixels(); ++x)

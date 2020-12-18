@@ -21,7 +21,7 @@ public:
 
     // Actions
     virtual void clear() = 0;
-    virtual void sleep() = 0; // TODO, necessary?
+    virtual void sleep() = 0;
     virtual void display(const bitmap_image &) = 0;
 
     // Image creation
