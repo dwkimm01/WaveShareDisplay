@@ -5,6 +5,10 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+
+#include <cmath>
+#include <math.h>
+
 #include "bitmap_display_2in9.h"
 
 int main(int argc, char* argv[])
@@ -29,7 +33,7 @@ int main(int argc, char* argv[])
         {
             const size_t x_center {5};
             const size_t y_center {5};
-            const size_t radius {5};
+            const size_t radius {3};
 
             if(radius > sqrt(
                 pow(x_center - x, 2) + pow(y_center - y, 2)
