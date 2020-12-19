@@ -81,7 +81,8 @@ int main(int argc, char* argv[])
             const size_t pixel_x = x;
             const size_t pixel_y = b.image_height_pixels() - diamond_height + y;
 
-            b.set(pixel_x, pixel_y, diamond_val);
+            if(0 != diamond_val)
+                b.set(pixel_x, pixel_y, 1);
         }
     }
 
