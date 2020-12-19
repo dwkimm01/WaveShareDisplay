@@ -36,9 +36,9 @@ int main(int argc, char* argv[])
     {
         for(size_t y = 0; y < 10; ++y)
         {
-            const size_t x_center {5};
-            const size_t y_center {5};
-            const size_t radius {3};
+            const double x_center {5.0};
+            const double y_center {5.0};
+            const double radius {5.0};
 
             if(radius > sqrt(
                 pow(x_center - x, 2) + pow(y_center - y, 2)
@@ -49,7 +49,6 @@ int main(int argc, char* argv[])
         }
     }
 
-
     // Display box in lower right
     for(size_t x = b.image_width_pixels()-10; x < b.image_width_pixels(); ++x)
     {
@@ -59,19 +58,38 @@ int main(int argc, char* argv[])
        }
     }
 
+    // Display diamond in lower left
+    std::vector<std::vector<int>> diamond =
+       {{0,0,0,0,1,0,0,0,0},
+        {0,0,0,1,1,1,0,0,0},
+        {0,0,1,1,1,1,1,0,0},
+        {0,1,1,1,1,1,1,1,0},
+        {1,1,1,1,1,1,1,1,1},
+        {0,1,1,1,1,1,1,1,0},
+        {0,0,1,1,1,1,1,0,0},
+        {0,0,0,1,1,1,0,0,0},
+        {0,0,0,0,1,0,0,0,0}};
+    const size_t diamond_width = diamond.at(0).size(); // assume all the same
+    const size_t diamond_height = diamond.size();
 
-/*
-    for(int x = 0; x < b.image_width_pixels(); ++x)
+    for(size_t x = 0; x < diamond_width; ++x)
     {
-        for(int y = 0; y < b.image_height_pixels(); ++y)
+        for(size_t y = 0; y < diamond_height; ++y)
         {
-           if(x > 0)
-              b.set(x, y, 1);
-//            if(0 == ((y * b.image_width_pixels() + x) % 2))
-//                b.set(x, y, 1);
+            const auto diamond_val = diamond.at(y).at(x);
+
+            const size_t pixel_x = x;
+            const size_t pixel_y = b.image_height_pixels() - diamond_height + y;
+
+            b.set(pixel_x, pixel_y, diamond_val);
         }
     }
-*/
+
+
+    // Display...
+    // - checkerboard pattern
+    // - gradient pattern
+    // - cool info
 
     display->display(b);
 
