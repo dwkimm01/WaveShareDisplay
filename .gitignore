@@ -34,6 +34,7 @@
 # Extras
 cmake-build-debug
 cmake-build-release
+build
 .idea
 *.swp
 *.bmp

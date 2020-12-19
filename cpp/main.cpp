@@ -6,6 +6,7 @@
 #include <thread>
 #include <chrono>
 
+#include <signal.h>
 #include <cmath>
 #include <math.h>
 

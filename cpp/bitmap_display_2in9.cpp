@@ -5,9 +5,8 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <signal.h>
 #include "bitmap_display_2in9.h"
-
-// #define USE_WIRINGPI_LIB 1
 
 extern "C" {
 #include "../c/examples/EPD_Test.h"
