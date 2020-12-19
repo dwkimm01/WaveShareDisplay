@@ -13,6 +13,8 @@ namespace waveshare_eink_cpp
 class bitmap_display_2in9 : public i_bitmap_display
 {
 public:
+    static void exit_handler(int signo);
+
     bitmap_display_2in9();
     virtual ~bitmap_display_2in9();
 

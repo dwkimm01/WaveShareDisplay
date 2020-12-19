@@ -17,16 +17,16 @@ extern "C" {
 
 namespace waveshare_eink_cpp
 {
+void bitmap_display_2in9::exit_handler(int signo)
+{
+    //System Exit
+    std::cout << "Exit handler: calling dev module exit" << std::endl;
+    DEV_Module_Exit();
+    exit(0);
+}
 
 bitmap_display_2in9::bitmap_display_2in9()
 {
-//#ifdef USE_WIRINGPI_LIB
-//  blah blah
-//#endif
-
-    // TODO, exit handler "DEV_Module_Exit()
-    // ... signal(SIGINT, Handler);
-
     // Taken from EPD_2in9_test.c
 
     // Module Init
@@ -55,14 +55,12 @@ bitmap_display_2in9::~bitmap_display_2in9()
 
 size_t bitmap_display_2in9::width_pixels() const
 {
-    // EPD_2IN9_WIDTH       128
-    return 128;
+    return EPD_2IN9_WIDTH;
 }
 
 size_t bitmap_display_2in9::height_pixels() const
 {
-    // EPD_2IN9_HEIGHT      296
-    return 296;
+    return EPD_2IN9_HEIGHT;
 }
 
 void bitmap_display_2in9::clear()

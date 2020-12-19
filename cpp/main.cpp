@@ -11,6 +11,7 @@
 
 #include "bitmap_display_2in9.h"
 
+
 int main(int argc, char* argv[])
 {
     using namespace std;
@@ -18,7 +19,10 @@ int main(int argc, char* argv[])
 
     cout << "Starting...\n";
 
-    std::shared_ptr<i_bitmap_display> display = std::make_shared<waveshare_eink_cpp::bitmap_display_2in9>();
+    // Exception handling:ctrl + c
+    signal(SIGINT, bitmap_display_2in9::exit_handler);
+
+    std::shared_ptr<i_bitmap_display> display = std::make_shared<bitmap_display_2in9>();
 
     auto b = display->create_image();
 
