@@ -58,35 +58,67 @@ int main(int argc, char* argv[])
        }
     }
 
-    // Display diamond in lower left
-    std::vector<std::vector<int>> diamond =
-       {{0,0,0,0,1,0,0,0,0},
-        {0,0,0,1,1,1,0,0,0},
-        {0,0,1,1,1,1,1,0,0},
-        {0,1,1,1,1,1,1,1,0},
-        {1,1,1,1,1,1,1,1,1},
-        {0,1,1,1,1,1,1,1,0},
-        {0,0,1,1,1,1,1,0,0},
-        {0,0,0,1,1,1,0,0,0},
-        {0,0,0,0,1,0,0,0,0}};
-    const size_t diamond_width = diamond.at(0).size(); // assume all the same
-    const size_t diamond_height = diamond.size();
-
-    for(size_t x = 0; x < diamond_width; ++x)
     {
-        for(size_t y = 0; y < diamond_height; ++y)
+        // Display diamond in lower left
+        std::vector<std::vector<int>> diamond =
+           {{0,0,0,0,1,0,0,0,0},
+            {0,0,0,1,1,1,0,0,0},
+            {0,0,1,1,1,1,1,0,0},
+            {0,1,1,1,1,1,1,1,0},
+            {1,1,1,1,1,1,1,1,1},
+            {0,1,1,1,1,1,1,1,0},
+            {0,0,1,1,1,1,1,0,0},
+            {0,0,0,1,1,1,0,0,0},
+            {0,0,0,0,1,0,0,0,0}};
+        const size_t diamond_width = diamond.at(0).size(); // assume all the same
+        const size_t diamond_height = diamond.size();
+    
+        for(size_t x = 0; x < diamond_width; ++x)
         {
-            const auto diamond_val = diamond.at(y).at(x);
-
-            const size_t pixel_x = x;
-            const size_t pixel_y = b.image_height_pixels() - diamond_height + y;
-
-            if(0 != diamond_val)
-                b.set(pixel_x, pixel_y, 1);
+            for(size_t y = 0; y < diamond_height; ++y)
+            {
+                const auto diamond_val = diamond.at(y).at(x);
+    
+                const size_t pixel_x = x;
+                const size_t pixel_y = b.image_height_pixels() - diamond_height + y;
+    
+                if(0 != diamond_val)
+                    b.set(pixel_x, pixel_y, 1);
+            }
         }
     }
 
 
+    {
+        // Display X in upper right
+        std::vector<std::vector<int>> xxx =
+                {{1,1,0,0,0,0,0,1,1},
+                 {1,1,1,0,0,0,1,1,1},
+                 {0,1,1,1,0,1,1,1,0},
+                 {0,0,1,1,1,1,1,0,0},
+                 {0,0,0,1,1,1,0,0,0},
+                 {0,0,1,1,1,1,1,0,0},
+                 {0,1,1,1,0,1,1,1,0},
+                 {1,1,1,0,0,0,1,1,1},
+                 {1,1,0,0,0,0,0,1,1}};
+        const size_t x_width = xxx.at(0).size(); // assume all the same
+        const size_t x_height = xxx.size();
+
+        for(size_t x = 0; x < x_width; ++x)
+        {
+            for(size_t y = 0; y < x_height; ++y)
+            {
+                const auto xxx_val = xxx.at(y).at(x);
+
+                const size_t pixel_x = b.image_width_pixels() - x_width + x;
+                const size_t pixel_y = b.image_height_pixels() - x_height + y;
+
+                if(0 != xxx_val)
+                    b.set(pixel_x, pixel_y, 1);
+            }
+        }
+    }
+    
     // Display...
     // - checkerboard pattern
     // - gradient pattern

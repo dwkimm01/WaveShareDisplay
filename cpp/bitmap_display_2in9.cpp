@@ -9,7 +9,16 @@
 #include "bitmap_display_2in9.h"
 
 extern "C" {
-#include "../c/examples/EPD_Test.h"
+
+
+// ----------------------------------------
+//#include "GUI_Paint.h"
+//#include "GUI_BMPfile.h"
+#include "../c/examples/ImageData.h"
+#include "Debug.h"
+#include <stdlib.h> // malloc() free()
+// ----------------------------------------
+
 #include "../c/lib/Config/DEV_Config.h"
 #include "../c/lib/e-Paper/EPD_2in9.h"
 }
