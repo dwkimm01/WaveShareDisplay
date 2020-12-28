@@ -50,7 +50,7 @@ void bitmap_image::set
 {
     if(Xpoint > Width || Ypoint > Height)
     {
-        throw std::runtime_error("Exceeding display boundaries");
+        //throw std::runtime_error("Exceeding display boundaries");
     }
     uint16_t X, Y;
     switch(Rotate) {
@@ -93,7 +93,7 @@ void bitmap_image::set
 
     if(X > WidthMemory || Y > HeightMemory)
     {
-        throw std::runtime_error("Exceeding display boundaries");
+        //throw std::runtime_error("Exceeding display boundaries");
     }
 
     if(Scale == 2)

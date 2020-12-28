@@ -133,6 +133,7 @@ int main(int argc, char* argv[])
         , drawing::d_BLACK
         );
 
+#if 0
     // Number
     drawing::Paint_DrawNum
         (b
@@ -141,9 +142,9 @@ int main(int argc, char* argv[])
         , drawing::d_WHITE
         , drawing::d_BLACK
         );
+#endif
 
     // Time
-
     const std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
     const time_t tt = std::chrono::system_clock::to_time_t(now);
     const tm utc_tm = *gmtime(&tt);
@@ -156,8 +157,14 @@ int main(int argc, char* argv[])
     pTime.Hour = local_tm.tm_hour;
     pTime.Min = local_tm.tm_min;
     pTime.Sec = local_tm.tm_sec;
-    drawing::Paint_DrawTime(b, 100, 120, &pTime, &Font12, drawing::d_WHITE, drawing::d_BLACK);
-
+    try 
+    {
+       drawing::Paint_DrawTime(b, 0, 0, &pTime, &Font8, drawing::d_WHITE, drawing::d_BLACK);
+    }
+    catch(const std::exception &e)
+    {
+       std::cout << "Exception drawing time: " << e.what() << std::endl;
+    }
     // Line
     drawing::Paint_DrawLine
         ( b
