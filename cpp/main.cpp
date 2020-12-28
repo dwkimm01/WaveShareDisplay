@@ -133,6 +133,31 @@ int main(int argc, char* argv[])
         , drawing::d_BLACK
         );
 
+    // Number
+    drawing::Paint_DrawNum
+        (b
+        , 0, 120
+        , 187, &Font16
+        , drawing::d_WHITE
+        , drawing::d_BLACK
+        );
+
+    // Time
+
+    const std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    const time_t tt = std::chrono::system_clock::to_time_t(now);
+    const tm utc_tm = *gmtime(&tt);
+    const tm local_tm = *localtime(&tt);
+
+    drawing::paint_time_t pTime;
+    pTime.Year = local_tm.tm_year + 1970;
+    pTime.Month = local_tm.tm_mon + 1;
+    pTime.Day = local_tm.tm_mday;
+    pTime.Hour = local_tm.tm_hour;
+    pTime.Min = local_tm.tm_min;
+    pTime.Sec = local_tm.tm_sec;
+    drawing::Paint_DrawTime(b, 100, 120, &pTime, &Font12, drawing::d_WHITE, drawing::d_BLACK);
+
     // Line
     drawing::Paint_DrawLine
         ( b

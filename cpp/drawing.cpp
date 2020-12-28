@@ -104,6 +104,70 @@ void drawing::Paint_DrawString_EN
     }
 }
 
+void drawing::Paint_DrawNum
+    ( bitmap_image & img
+    , const size_t Xpoint
+    , const size_t Ypoint
+    , int32_t Nummber
+    , sFONT* Font
+    , const color_t Color_Foreground
+    , const color_t Color_Background
+    )
+{
+
+    const size_t ARRAY_LEN {255};
+    int16_t Num_Bit = 0, Str_Bit = 0;
+    uint8_t Str_Array[ARRAY_LEN] = {0}, Num_Array[ARRAY_LEN] = {0};
+    uint8_t *pStr = Str_Array;
+
+    if (Xpoint > img.image_width_pixels() || Ypoint > img.image_height_pixels()) {
+        //Debug("Paint_DisNum Input exceeds the normal display range\r\n");
+        return;
+    }
+
+    //Converts a number to a string
+    while (Nummber) {
+        Num_Array[Num_Bit] = Nummber % 10 + '0';
+        Num_Bit++;
+        Nummber /= 10;
+    }
+
+    //The string is inverted
+    while (Num_Bit > 0) {
+        Str_Array[Str_Bit] = Num_Array[Num_Bit - 1];
+        Str_Bit ++;
+        Num_Bit --;
+    }
+
+    //show
+    Paint_DrawString_EN(img, Xpoint, Ypoint, (const char*)pStr, Font, Color_Background, Color_Foreground);
+}
+
+void drawing::Paint_DrawTime
+    ( bitmap_image & img
+    , const size_t Xstart
+    , const size_t Ystart
+    , const paint_time_t *pTime
+    , sFONT* Font
+    , const color_t Color_Foreground
+    , const color_t Color_Background
+    )
+{
+    uint8_t value[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+
+    size_t Dx = Font->Width;
+
+    //Write data into the cache
+    Paint_DrawChar(img, Xstart                           , Ystart, value[pTime->Hour / 10], Font, Color_Background, Color_Foreground);
+    Paint_DrawChar(img, Xstart + Dx                      , Ystart, value[pTime->Hour % 10], Font, Color_Background, Color_Foreground);
+    Paint_DrawChar(img, Xstart + Dx  + Dx / 4 + Dx / 2   , Ystart, ':'                    , Font, Color_Background, Color_Foreground);
+    Paint_DrawChar(img, Xstart + Dx * 2 + Dx / 2         , Ystart, value[pTime->Min / 10] , Font, Color_Background, Color_Foreground);
+    Paint_DrawChar(img, Xstart + Dx * 3 + Dx / 2         , Ystart, value[pTime->Min % 10] , Font, Color_Background, Color_Foreground);
+    Paint_DrawChar(img, Xstart + Dx * 4 + Dx / 2 - Dx / 4, Ystart, ':'                    , Font, Color_Background, Color_Foreground);
+    Paint_DrawChar(img, Xstart + Dx * 5                  , Ystart, value[pTime->Sec / 10] , Font, Color_Background, Color_Foreground);
+    Paint_DrawChar(img, Xstart + Dx * 6                  , Ystart, value[pTime->Sec % 10] , Font, Color_Background, Color_Foreground);
+}
+
 void drawing::Paint_DrawPoint
     ( bitmap_image & img
     , const size_t Xpoint

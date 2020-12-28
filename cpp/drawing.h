@@ -71,6 +71,36 @@ public:
         , const color_t Color_Background
         );
 
+    static void Paint_DrawNum
+        ( bitmap_image & img
+        , const size_t Xpoint
+        , const size_t Ypoint
+        , int32_t Nummber
+        , sFONT* Font
+        , const color_t Color_Foreground
+        , const color_t Color_Background
+        );
+
+    // Time
+    struct paint_time_t {
+        size_t Year;  //0000
+        uint8_t Month; //1 - 12
+        uint8_t  Day;   //1 - 30
+        uint8_t  Hour;  //0 - 23
+        uint8_t  Min;   //0 - 59
+        uint8_t  Sec;   //0 - 59
+    };
+
+    static void Paint_DrawTime
+        ( bitmap_image & img
+        , const size_t Xstart
+        , const size_t Ystart
+        , const paint_time_t *pTime
+        , sFONT* Font
+        , const color_t Color_Foreground
+        , const color_t Color_Background
+        );
+
     // Lines and shapes
     static void Paint_DrawPoint
         ( bitmap_image & img
