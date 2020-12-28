@@ -14,18 +14,18 @@ void drawing::Paint_DrawChar
     , const size_t Ypoint
     , const char Acsii_Char
     , sFONT* Font
-    , const size_t Color_Foreground
-    , const size_t Color_Background
+    , const color_t Color_Foreground
+    , const color_t Color_Background
     )
 {
 
-#define WHITE          0xFF
-#define BLACK          0x00
-#define RED            BLACK
+//#define WHITE          0xFF
+//#define BLACK          0x00
+//#define RED            BLACK
 
-#define IMAGE_BACKGROUND    WHITE
-#define FONT_FOREGROUND     BLACK
-#define FONT_BACKGROUND     WHITE
+#define IMAGE_BACKGROUND    d_WHITE
+#define FONT_FOREGROUND     d_BLACK
+#define FONT_BACKGROUND     d_WHITE
 
     size_t Page, Column;
 
@@ -70,8 +70,8 @@ void drawing::Paint_DrawString_EN
     , const size_t Ystart
     , const char * pString
     , sFONT* Font
-    , const size_t Color_Foreground
-    , const size_t Color_Background
+    , const color_t Color_Foreground
+    , const color_t Color_Background
     )
 {
     size_t Xpoint = Xstart;
@@ -101,6 +101,96 @@ void drawing::Paint_DrawString_EN
 
         //The next word of the abscissa increases the font of the broadband
         Xpoint += Font->Width;
+    }
+}
+
+void drawing::Paint_DrawPoint
+    ( bitmap_image & img
+    , const size_t Xpoint
+    , const size_t Ypoint
+    , const color_t Color
+    , const dot_pixel_t Dot_Pixel
+    , const dot_style_t Dot_Style
+    )
+{
+    if (Xpoint > img.image_width_pixels() || Ypoint > img.image_height_pixels()) {
+        // Debug("Paint_DrawPoint Input exceeds the normal display range\r\n");
+        return;
+    }
+
+    int16_t XDir_Num , YDir_Num;
+    if (Dot_Style == d_DOT_FILL_AROUND) {
+        for (XDir_Num = 0; XDir_Num < 2 * Dot_Pixel - 1; XDir_Num++) {
+            for (YDir_Num = 0; YDir_Num < 2 * Dot_Pixel - 1; YDir_Num++) {
+                if(Xpoint + XDir_Num - Dot_Pixel < 0 || Ypoint + YDir_Num - Dot_Pixel < 0)
+                    break;
+                // printf("x = %d, y = %d\r\n", Xpoint + XDir_Num - Dot_Pixel, Ypoint + YDir_Num - Dot_Pixel);
+                img.set(Xpoint + XDir_Num - Dot_Pixel, Ypoint + YDir_Num - Dot_Pixel, Color);
+            }
+        }
+    } else {
+        for (XDir_Num = 0; XDir_Num <  Dot_Pixel; XDir_Num++) {
+            for (YDir_Num = 0; YDir_Num <  Dot_Pixel; YDir_Num++) {
+                img.set(Xpoint + XDir_Num - 1, Ypoint + YDir_Num - 1, Color);
+            }
+        }
+    }
+}
+
+
+void drawing::Paint_DrawLine
+    ( bitmap_image & img
+    , const size_t Xstart
+    , const size_t Ystart
+    , const size_t Xend
+    , const size_t Yend
+    , const color_t Color
+    , const dot_pixel_t Line_width
+    , const line_style_t Line_Style
+    )
+{
+    if (Xstart > img.image_width_pixels() || Ystart > img.image_height_pixels() ||
+        Xend > img.image_width_pixels() || Yend > img.image_height_pixels())
+    {
+        // Debug("Paint_DrawLine Input exceeds the normal display range\r\n");
+        return;
+    }
+
+    size_t Xpoint = Xstart;
+    size_t Ypoint = Ystart;
+    const int dx = (int)Xend - (int)Xstart >= 0 ? Xend - Xstart : Xstart - Xend;
+    const int dy = (int)Yend - (int)Ystart <= 0 ? Yend - Ystart : Ystart - Yend;
+
+    // Increment direction, 1 is positive, -1 is counter;
+    int XAddway = Xstart < Xend ? 1 : -1;
+    int YAddway = Ystart < Yend ? 1 : -1;
+
+    //Cumulative error
+    int Esp = dx + dy;
+    char Dotted_Len = 0;
+
+    for (;;) {
+        Dotted_Len++;
+        //Painted dotted line, 2 point is really virtual
+        if (Line_Style == d_LINE_STYLE_DOTTED && Dotted_Len % 3 == 0) {
+            //Debug("LINE_DOTTED\r\n");
+            Paint_DrawPoint(img, Xpoint, Ypoint, IMAGE_BACKGROUND, Line_width, d_DOT_STYLE_DFT);
+            Dotted_Len = 0;
+        } else {
+            Paint_DrawPoint(img, Xpoint, Ypoint, Color, Line_width, d_DOT_STYLE_DFT);
+        }
+        if (2 * Esp >= dy) {
+            if (Xpoint == Xend)
+                break;
+            Esp += dy;
+            Xpoint += XAddway;
+        }
+        if (2 * Esp <= dx) {
+            if (Ypoint == Yend)
+                break;
+            Esp += dx;
+            Ypoint += YAddway;
+        }
     }
 }
 
