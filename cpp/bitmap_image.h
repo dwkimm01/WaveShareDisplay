@@ -6,6 +6,7 @@
 #define E_PAPER_BITMAPIMAGE_H
 
 #include <vector>
+#include <stdint.h>
 
 namespace waveshare_eink_cpp
 {

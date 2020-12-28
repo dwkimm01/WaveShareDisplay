@@ -129,7 +129,7 @@ int main(int argc, char* argv[])
     // Text!
     drawing::Paint_DrawString_EN
         (b, 0, 0, "Hello"
-        , &Font16, 0x00, 0xFF
+        , &Font16, 0xFF, 0x00
         );
 
 
