@@ -194,5 +194,35 @@ void drawing::Paint_DrawLine
     }
 }
 
+void drawing::Paint_DrawRectangle
+    ( bitmap_image & img
+    , const size_t Xstart
+    , const size_t Ystart
+    , const size_t Xend
+    , const size_t Yend
+    , const color_t Color
+    , const dot_pixel_t Line_width
+    , const draw_fill_t Draw_Fill
+    )
+{
+    if (Xstart > img.image_width_pixels() || Ystart > img.image_height_pixels() ||
+        Xend > img.image_width_pixels() || Yend > img.image_height_pixels())
+    {
+        // Debug("Input exceeds the normal display range\r\n");
+        return;
+    }
+
+    if (Draw_Fill) {
+        size_t Ypoint;
+        for(Ypoint = Ystart; Ypoint < Yend; Ypoint++) {
+            Paint_DrawLine(img, Xstart, Ypoint, Xend, Ypoint, Color , Line_width, d_LINE_STYLE_SOLID);
+        }
+    } else {
+        Paint_DrawLine(img, Xstart, Ystart, Xend, Ystart, Color, Line_width, d_LINE_STYLE_SOLID);
+        Paint_DrawLine(img, Xstart, Ystart, Xstart, Yend, Color, Line_width, d_LINE_STYLE_SOLID);
+        Paint_DrawLine(img, Xend, Yend, Xend, Ystart, Color, Line_width, d_LINE_STYLE_SOLID);
+        Paint_DrawLine(img, Xend, Yend, Xstart, Yend, Color, Line_width, d_LINE_STYLE_SOLID);
+    }
+}
 
 }

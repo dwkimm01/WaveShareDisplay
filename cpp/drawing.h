@@ -45,6 +45,11 @@ public:
     , d_LINE_STYLE_DOTTED
     };
 
+    enum draw_fill_t
+    { d_DRAW_FILL_EMPTY = 0
+    , d_DRAW_FILL_FULL
+    };
+
     // Text
     static void Paint_DrawChar
         ( bitmap_image & img
@@ -87,6 +92,16 @@ public:
         , const line_style_t Line_Style
         );
 
+    static void Paint_DrawRectangle
+        ( bitmap_image & img
+        , const size_t Xstart
+        , const size_t Ystart
+        , const size_t Xend
+        , const size_t Yend
+        , const color_t Color
+        , const dot_pixel_t Line_width
+        , const draw_fill_t Draw_Fill
+        );
 };
 
 }

@@ -141,6 +141,16 @@ int main(int argc, char* argv[])
         , drawing::d_WHITE, drawing::d_DOT_PIXEL_2X2
         , drawing::d_LINE_STYLE_SOLID);
 
+    // Rectangle
+    drawing::Paint_DrawRectangle
+        ( b
+        , 80, 80
+        , 100, 100
+        , drawing::d_WHITE
+        , drawing::d_DOT_PIXEL_4X4
+        , drawing::d_DRAW_FILL_EMPTY
+        );
+
     display->display(b);
 
 
