@@ -102,6 +102,16 @@ public:
         , const dot_pixel_t Line_width
         , const draw_fill_t Draw_Fill
         );
+
+    static void Paint_DrawCircle
+        ( bitmap_image & img
+        , const size_t X_Center
+        , const size_t Y_Center
+        , const size_t Radius
+        , const color_t Color
+        , const dot_pixel_t Line_width
+        , const draw_fill_t Draw_Fill
+        );
 };
 
 }

@@ -225,4 +225,71 @@ void drawing::Paint_DrawRectangle
     }
 }
 
+
+void drawing::Paint_DrawCircle
+    ( bitmap_image & img
+    , const size_t X_Center
+    , const size_t Y_Center
+    , const size_t Radius
+    , const color_t Color
+    , const dot_pixel_t Line_width
+    , const draw_fill_t Draw_Fill
+    )
+{
+    if (X_Center > img.image_width_pixels() || Y_Center >= img.image_height_pixels()) {
+        // Debug("Paint_DrawCircle Input exceeds the normal display range\r\n");
+        return;
+    }
+
+    //Draw a circle from(0, R) as a starting point
+    int16_t XCurrent, YCurrent;
+    XCurrent = 0;
+    YCurrent = Radius;
+
+    //Cumulative error,judge the next point of the logo
+    int16_t Esp = 3 - (Radius << 1 );
+
+    int16_t sCountY;
+    if (Draw_Fill == d_DRAW_FILL_FULL) {
+        while (XCurrent <= YCurrent ) { //Realistic circles
+            for (sCountY = XCurrent; sCountY <= YCurrent; sCountY ++ ) {
+                Paint_DrawPoint(img, X_Center + XCurrent, Y_Center + sCountY, Color, d_DOT_PIXEL_DFT, d_DOT_STYLE_DFT);//1
+                Paint_DrawPoint(img, X_Center - XCurrent, Y_Center + sCountY, Color, d_DOT_PIXEL_DFT, d_DOT_STYLE_DFT);//2
+                Paint_DrawPoint(img, X_Center - sCountY, Y_Center + XCurrent, Color, d_DOT_PIXEL_DFT, d_DOT_STYLE_DFT);//3
+                Paint_DrawPoint(img, X_Center - sCountY, Y_Center - XCurrent, Color, d_DOT_PIXEL_DFT, d_DOT_STYLE_DFT);//4
+                Paint_DrawPoint(img, X_Center - XCurrent, Y_Center - sCountY, Color, d_DOT_PIXEL_DFT, d_DOT_STYLE_DFT);//5
+                Paint_DrawPoint(img, X_Center + XCurrent, Y_Center - sCountY, Color, d_DOT_PIXEL_DFT, d_DOT_STYLE_DFT);//6
+                Paint_DrawPoint(img, X_Center + sCountY, Y_Center - XCurrent, Color, d_DOT_PIXEL_DFT, d_DOT_STYLE_DFT);//7
+                Paint_DrawPoint(img, X_Center + sCountY, Y_Center + XCurrent, Color, d_DOT_PIXEL_DFT, d_DOT_STYLE_DFT);//8
+            }
+            if (Esp < 0 )
+                Esp += 4 * XCurrent + 6;
+            else {
+                Esp += 10 + 4 * (XCurrent - YCurrent );
+                YCurrent --;
+            }
+            XCurrent ++;
+        }
+    } else { //Draw a hollow circle
+        while (XCurrent <= YCurrent ) {
+            Paint_DrawPoint(img, X_Center + XCurrent, Y_Center + YCurrent, Color, Line_width, d_DOT_STYLE_DFT);//1
+            Paint_DrawPoint(img, X_Center - XCurrent, Y_Center + YCurrent, Color, Line_width, d_DOT_STYLE_DFT);//2
+            Paint_DrawPoint(img, X_Center - YCurrent, Y_Center + XCurrent, Color, Line_width, d_DOT_STYLE_DFT);//3
+            Paint_DrawPoint(img, X_Center - YCurrent, Y_Center - XCurrent, Color, Line_width, d_DOT_STYLE_DFT);//4
+            Paint_DrawPoint(img, X_Center - XCurrent, Y_Center - YCurrent, Color, Line_width, d_DOT_STYLE_DFT);//5
+            Paint_DrawPoint(img, X_Center + XCurrent, Y_Center - YCurrent, Color, Line_width, d_DOT_STYLE_DFT);//6
+            Paint_DrawPoint(img, X_Center + YCurrent, Y_Center - XCurrent, Color, Line_width, d_DOT_STYLE_DFT);//7
+            Paint_DrawPoint(img, X_Center + YCurrent, Y_Center + XCurrent, Color, Line_width, d_DOT_STYLE_DFT);//8
+
+            if (Esp < 0 )
+                Esp += 4 * XCurrent + 6;
+            else {
+                Esp += 10 + 4 * (XCurrent - YCurrent );
+                YCurrent --;
+            }
+            XCurrent ++;
+        }
+    }
+}
+
 }

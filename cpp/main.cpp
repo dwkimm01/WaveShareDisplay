@@ -151,6 +151,16 @@ int main(int argc, char* argv[])
         , drawing::d_DRAW_FILL_EMPTY
         );
 
+    // Circle
+    drawing::Paint_DrawCircle
+        (b
+        , 120, 80
+        , 20
+        , drawing::d_WHITE
+        , drawing::d_DOT_PIXEL_4X4
+        , drawing::d_DRAW_FILL_EMPTY
+        );
+
     display->display(b);
 
 
