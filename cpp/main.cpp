@@ -126,13 +126,20 @@ int main(int argc, char* argv[])
     // - gradient pattern
     // - cool info
 
-    // Text!
+    // Text
     drawing::Paint_DrawString_EN
         (b, 0, 0, "Hello"
         , &Font16, drawing::d_WHITE
         , drawing::d_BLACK
         );
 
+    // Line
+    drawing::Paint_DrawLine
+        ( b
+        , 20, 20
+        , 40, 40
+        , drawing::d_WHITE, drawing::d_DOT_PIXEL_2X2
+        , drawing::d_LINE_STYLE_SOLID);
 
     display->display(b);
 
