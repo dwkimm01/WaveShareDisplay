@@ -11,6 +11,8 @@
 #include <math.h>
 
 #include "bitmap_display_2in9.h"
+#include "drawing.h"
+#include "../c/lib/Fonts/fonts.h"
 
 
 int main(int argc, char* argv[])
@@ -124,7 +126,16 @@ int main(int argc, char* argv[])
     // - gradient pattern
     // - cool info
 
+    // Text!
+    drawing::Paint_DrawString_EN
+        (b, 0, 0, "Hello"
+        , &Font16, 0x00, 0xFF
+        );
+
+
     display->display(b);
+
+
 
     std::this_thread::sleep_for(chrono::milliseconds(10000) );
 

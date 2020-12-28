@@ -37,14 +37,14 @@ set(EINK_SRCS
 #        c/lib/Config/sysfs_software_spi.c
 #        c/lib/Config/sysfs_software_spi.h
 
-#       c/lib/Fonts/font8.c
-#       c/lib/Fonts/font12.c
+       c/lib/Fonts/font8.c
+       c/lib/Fonts/font12.c
 #       c/lib/Fonts/font12CN.c
-#       c/lib/Fonts/font16.c
-#       c/lib/Fonts/font20.c
-#       c/lib/Fonts/font24.c
+       c/lib/Fonts/font16.c
+       c/lib/Fonts/font20.c
+       c/lib/Fonts/font24.c
 #       c/lib/Fonts/font24CN.c
-#       c/lib/Fonts/fonts.h
+       c/lib/Fonts/fonts.h
 
 #       c/lib/GUI/GUI_BMPfile.c
 #       c/lib/GUI/GUI_BMPfile.h
@@ -62,6 +62,8 @@ add_executable(wseink_cpp
         cpp/bitmap_display_2in9.h
         cpp/bitmap_image.cpp
         cpp/bitmap_image.h
+        cpp/drawing.cpp
+        cpp/drawing.h
         cpp/i_bitmap_display.h
         cpp/main.cpp
     )

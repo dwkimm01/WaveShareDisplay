@@ -14,7 +14,7 @@ extern "C" {
 // ----------------------------------------
 //#include "GUI_Paint.h"
 //#include "GUI_BMPfile.h"
-#include "../c/examples/ImageData.h"
+#include "../c/examples/ImageData.h" // TODO, fix relative path
 #include "Debug.h"
 #include <stdlib.h> // malloc() free()
 // ----------------------------------------
@@ -100,6 +100,8 @@ bitmap_image bitmap_display_2in9::create_image()
     return b;
 }
 
+
+// ---------------------------------------------------------------------------
 void bitmap_display_2in9::display_init(bool full)
 {
     if(full)
