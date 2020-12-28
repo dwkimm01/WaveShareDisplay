@@ -133,21 +133,21 @@ int main(int argc, char* argv[])
         , drawing::d_BLACK
         );
 
-#if 0
+
     // Number
     drawing::Paint_DrawNum
         (b
-        , 0, 120
+        , 120, 10
         , 187, &Font16
         , drawing::d_WHITE
         , drawing::d_BLACK
         );
-#endif
+
 
     // Time
     const std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
     const time_t tt = std::chrono::system_clock::to_time_t(now);
-    const tm utc_tm = *gmtime(&tt);
+    // const tm utc_tm = *gmtime(&tt);
     const tm local_tm = *localtime(&tt);
 
     drawing::paint_time_t pTime;
@@ -159,7 +159,7 @@ int main(int argc, char* argv[])
     pTime.Sec = local_tm.tm_sec;
     try 
     {
-       drawing::Paint_DrawTime(b, 0, 0, &pTime, &Font8, drawing::d_WHITE, drawing::d_BLACK);
+       drawing::Paint_DrawTime(b, 30, 105, &pTime, &Font8, drawing::d_WHITE, drawing::d_BLACK);
     }
     catch(const std::exception &e)
     {
