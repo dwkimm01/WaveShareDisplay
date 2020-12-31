@@ -18,6 +18,11 @@ else()
     set(wiringPi_LIB)
 endif()
 
+if(ENABLE_DROGON)
+# -DCMAKE_PREFIX_PATH=/Users/dwkimm01/opt/drogon/lib/cmake
+find_package(Drogon CONFIG REQUIRED)
+add_definitions(-DENABLE_DROGON)
+endif()
 
 # set_source_files_properties(*.c PROPERTIES LANGUAGE CXX )
 
@@ -66,6 +71,8 @@ add_executable(wseink_cpp
         cpp/drawing.h
         cpp/i_bitmap_display.h
         cpp/main.cpp
+        cpp/waveshare_web_service.cpp
+        cpp/waveshare_web_service.h
     )
 
 target_include_directories(wseink_cpp PUBLIC
@@ -73,3 +80,7 @@ target_include_directories(wseink_cpp PUBLIC
         c/lib/GUI
     )
 target_link_libraries(wseink_cpp PUBLIC ${wiringPi_LIB})
+
+if(ENABLE_DROGON)
+    target_link_libraries(wseink_cpp PUBLIC Drogon::Drogon)
+endif()
