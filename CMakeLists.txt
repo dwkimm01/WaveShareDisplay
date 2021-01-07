@@ -22,6 +22,19 @@ if(ENABLE_DROGON)
 # -DCMAKE_PREFIX_PATH=/Users/dwkimm01/opt/drogon/lib/cmake
 find_package(Drogon CONFIG REQUIRED)
 add_definitions(-DENABLE_DROGON)
+
+set(Boost_USE_STATIC_LIBS        ON)  # only find static libs
+set(Boost_USE_DEBUG_LIBS         OFF) # ignore debug libs and
+set(Boost_USE_RELEASE_LIBS       ON)  # only find release libs
+set(Boost_USE_MULTITHREADED      ON)
+set(Boost_USE_STATIC_RUNTIME    OFF)
+find_package(Boost 1.72.0 COMPONENTS date_time filesystem system)
+#if(Boost_FOUND)
+#  include_directories(${Boost_INCLUDE_DIRS})
+#  add_executable(foo foo.cc)
+#  target_link_libraries(foo ${Boost_LIBRARIES})
+#endif()
+
 endif()
 
 # set_source_files_properties(*.c PROPERTIES LANGUAGE CXX )
@@ -80,6 +93,10 @@ target_include_directories(wseink_cpp PUBLIC
         c/lib/GUI
     )
 target_link_libraries(wseink_cpp PUBLIC ${wiringPi_LIB})
+
+if(Boost_FOUND)
+   target_link_libraries(wseink_cpp PUBLIC Boost::boost)
+endif()
 
 if(ENABLE_DROGON)
     target_link_libraries(wseink_cpp PUBLIC Drogon::Drogon)

@@ -14,7 +14,7 @@ waveshare_web_service::waveshare_web_service()
 
 #ifdef ENABLE_DROGON
     //Set HTTP listener address and port
-    drogon::app().addListener("0.0.0.0",80);
+    drogon::app().addListener("0.0.0.0",8080);
     //Load config file
     //drogon::app().loadConfigFile("../config.json");
 
