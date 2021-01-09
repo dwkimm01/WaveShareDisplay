@@ -77,7 +77,6 @@ waveshare_web_service::waveshare_web_service
                   if(m_screen_manager_ptr)
                   {
                       clear_current_screen_result = m_screen_manager_ptr->clear_current_screen(pixel_value);
-                      draw_current_screen_result = m_screen_manager_ptr->draw_current_screen();
                   }
 
                   Json::Value json;

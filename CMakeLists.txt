@@ -89,8 +89,12 @@ add_executable(wseink_cpp
 
         cpp/impl/screens/screen_circle.cpp
         cpp/impl/screens/screen_circle.h
+        cpp/impl/screens/screen_diamond.cpp
+        cpp/impl/screens/screen_diamond.h
         cpp/impl/screens/screen_square.cpp
         cpp/impl/screens/screen_square.h
+        cpp/impl/screens/screen_x.cpp
+        cpp/impl/screens/screen_x.h
 
         cpp/interfaces/i_bitmap_display.h
         cpp/interfaces/i_screen.h

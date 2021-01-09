@@ -17,7 +17,9 @@
 
 #include "impl/screen_manager.h"
 #include "impl/screens/screen_circle.h"
+#include "impl/screens/screen_diamond.h"
 #include "impl/screens/screen_square.h"
+#include "impl/screens/screen_x.h"
 
 void display_test()
 {
@@ -37,66 +39,7 @@ void display_test()
     //   b.set(i, i, 1);
 
 
-    {
-        // Display diamond in lower left
-        std::vector<std::vector<int>> diamond =
-                {{0,0,0,0,1,0,0,0,0},
-                 {0,0,0,1,1,1,0,0,0},
-                 {0,0,1,1,1,1,1,0,0},
-                 {0,1,1,1,1,1,1,1,0},
-                 {1,1,1,1,1,1,1,1,1},
-                 {0,1,1,1,1,1,1,1,0},
-                 {0,0,1,1,1,1,1,0,0},
-                 {0,0,0,1,1,1,0,0,0},
-                 {0,0,0,0,1,0,0,0,0}};
-        const size_t diamond_width = diamond.at(0).size(); // assume all the same
-        const size_t diamond_height = diamond.size();
 
-        for(size_t x = 0; x < diamond_width; ++x)
-        {
-            for(size_t y = 0; y < diamond_height; ++y)
-            {
-                const auto diamond_val = diamond.at(y).at(x);
-
-                const size_t pixel_x = x;
-                const size_t pixel_y = b.image_height_pixels() - diamond_height + y;
-
-                if(0 != diamond_val)
-                    b.set(pixel_x, pixel_y, 1);
-            }
-        }
-    }
-
-
-    {
-        // Display X in upper right
-        std::vector<std::vector<int>> xxx =
-                {{1,1,0,0,0,0,0,1,1},
-                 {1,1,1,0,0,0,1,1,1},
-                 {0,1,1,1,0,1,1,1,0},
-                 {0,0,1,1,1,1,1,0,0},
-                 {0,0,0,1,1,1,0,0,0},
-                 {0,0,1,1,1,1,1,0,0},
-                 {0,1,1,1,0,1,1,1,0},
-                 {1,1,1,0,0,0,1,1,1},
-                 {1,1,0,0,0,0,0,1,1}};
-        const size_t x_width = xxx.at(0).size(); // assume all the same
-        const size_t x_height = xxx.size();
-
-        for(size_t x = 0; x < x_width; ++x)
-        {
-            for(size_t y = 0; y < x_height; ++y)
-            {
-                const auto xxx_val = xxx.at(y).at(x);
-
-                const size_t pixel_x = b.image_width_pixels() - x_width + x;
-                const size_t pixel_y = b.image_height_pixels() - x_height + y;
-
-                if(0 != xxx_val)
-                    b.set(pixel_x, pixel_y, 1);
-            }
-        }
-    }
 
     // Display...
     // - checkerboard pattern
@@ -221,8 +164,9 @@ int main(int argc, char* argv[])
 
     // Screens
     screen_manager_ptr->add_screen("circle", std::shared_ptr<i_screen>(new screen_circle()));
+    screen_manager_ptr->add_screen("diamond", std::shared_ptr<i_screen>(new screen_diamond()));
     screen_manager_ptr->add_screen("square", std::shared_ptr<i_screen>(new screen_square()));
-
+    screen_manager_ptr->add_screen("x", std::shared_ptr<i_screen>(new screen_x()));
 
 #ifdef ENABLE_DROGON
     waveshare_web_service s(screen_manager_ptr);
