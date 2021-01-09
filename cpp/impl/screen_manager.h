@@ -44,6 +44,10 @@ public:
         ( const uint8_t val
         ) override;
 
+    virtual std::vector<std::string> list_screens
+        (
+        ) override;
+
 private:
     std::shared_ptr<i_bitmap_display> m_bitmap_display_ptr;
     bitmap_image m_img;

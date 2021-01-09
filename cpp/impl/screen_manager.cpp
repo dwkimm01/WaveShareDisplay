@@ -80,4 +80,21 @@ bool screen_manager::clear_current_screen
     return true;
 }
 
+std::vector<std::string> screen_manager::list_screens
+    (
+    )
+{
+    std::vector<std::string> screen_vec;
+
+    std::lock_guard<std::mutex> lock(m_mutex);
+    screen_vec.reserve(m_screen_map.size());
+
+    for(const auto & screen : m_screen_map)
+    {
+        screen_vec.push_back(screen.first);
+    }
+
+    return screen_vec;
+}
+
 }

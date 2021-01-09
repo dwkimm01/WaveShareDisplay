@@ -23,20 +23,40 @@ waveshare_web_service::waveshare_web_service
 
 // https://drogon.docsforge.com/master/getting-started/#a-very-simple-example
     using namespace drogon;
-    app().registerHandler("/test?username={name}",
-          [](const HttpRequestPtr& req,
-             std::function<void (const HttpResponsePtr &)> &&callback,
-                 const std::string &name)
+//    app().registerHandler("/test?username={name}",
+//          [](const HttpRequestPtr& req,
+//             std::function<void (const HttpResponsePtr &)> &&callback,
+//                 const std::string &name)
+//          {
+//              Json::Value json;
+//              json["result"]="ok";
+//              json["message"]=std::string("hello,")+name;
+//              auto resp=HttpResponse::newHttpJsonResponse(json);
+//              callback(resp);
+//          },
+//          {Get,"LoginFilter"});
+
+
+    app().registerHandler("/api/list",
+          [&](const HttpRequestPtr& req,
+             std::function<void (const HttpResponsePtr &)> &&callback)
           {
               Json::Value json;
               json["result"]="ok";
-              json["message"]=std::string("hello,")+name;
+
+              std::vector<std::string> names = m_screen_manager_ptr->list_screens();
+              for(const auto & name : names)
+              {
+                 json["screen_list"].append(name);
+              }
+
               auto resp=HttpResponse::newHttpJsonResponse(json);
               callback(resp);
-          },
-          {Get,"LoginFilter"});
+          } /*,
+          {Get,"LoginFilter"}*/ );
 
-    app().registerHandler("/api/display={name}",
+
+    app().registerHandler("/api/screen={name}",
           [&](const HttpRequestPtr& req,
              std::function<void (const HttpResponsePtr &)> &&callback,
              const std::string &name)
@@ -48,8 +68,27 @@ waveshare_web_service::waveshare_web_service
 
               if(m_screen_manager_ptr)
               {
-                  set_screen_result = m_screen_manager_ptr->set_screen(name);
-                  draw_current_screen_result = m_screen_manager_ptr->draw_current_screen();
+
+                  if(name != "all")
+                  {
+                      set_screen_result = m_screen_manager_ptr->set_screen(name);
+                      if(set_screen_result)
+                      {
+                          draw_current_screen_result = m_screen_manager_ptr->draw_current_screen();
+                      }
+                  }
+                  else
+                  {
+                      const auto names = m_screen_manager_ptr->list_screens();
+                      for(const auto & name : names)
+                      {
+                          set_screen_result = m_screen_manager_ptr->set_screen(name);
+                          if(set_screen_result)
+                          {
+                              draw_current_screen_result = m_screen_manager_ptr->draw_current_screen();
+                          }
+                      }
+                  }
               }
 
               Json::Value json;

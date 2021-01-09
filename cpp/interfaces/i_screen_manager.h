@@ -38,6 +38,10 @@ public:
     virtual bool clear_current_screen
         ( const uint8_t val
         ) = 0;
+
+    virtual std::vector<std::string> list_screens
+        (
+        ) = 0;
 };
 }
 #endif //WSEINK_CPP_I_DISPLAY_MANAGER_H
