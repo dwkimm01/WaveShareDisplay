@@ -16,7 +16,7 @@ bitmap_image::bitmap_image
     , const uint16_t color
     ) : WidthMemory(image_width_pixels)
       , HeightMemory(image_height_pixels)
-      , Color(color)
+//      , Color(color)
       , Scale(2)
       , WidthByte((image_width_pixels % 8 == 0)? (image_width_pixels / 8 ): (image_width_pixels / 8 + 1))
       , HeightByte(image_height_pixels)
@@ -45,12 +45,13 @@ size_t bitmap_image::bits_per_pixel() const { return 8; } // TODO
 void bitmap_image::set
     ( const size_t Xpoint
     , const size_t Ypoint
-    , const input_pixel_t val
+    , const input_pixel_t pixel_val
     )
 {
+    input_pixel_t val = pixel_val;
     if(Xpoint > Width || Ypoint > Height)
     {
-        //throw std::runtime_error("Exceeding display boundaries");
+        return; // Exceeding display boundaries
     }
     uint16_t X, Y;
     switch(Rotate) {
@@ -93,29 +94,29 @@ void bitmap_image::set
 
     if(X > WidthMemory || Y > HeightMemory)
     {
-        //throw std::runtime_error("Exceeding display boundaries");
+        return; // Exceeding display boundaries
     }
 
     if(Scale == 2)
     {
         uint16_t Addr = X / 8 + Y * WidthByte;
         uint16_t Rdata = m_pixel_data.at(Addr);
-        if(Color == CBLACK)
+        if(val == CBLACK)
             m_pixel_data.at(Addr) = Rdata & ~(0x80 >> (X % 8));
         else
             m_pixel_data.at(Addr) = Rdata | (0x80 >> (X % 8));
     }else if(Scale == 4){
         uint32_t Addr = X / 4 + Y * WidthByte;
-        Color = Color % 4;//Guaranteed color scale is 4  --- 0~3
+        val = val % 4;//Guaranteed color scale is 4  --- 0~3
         uint8_t Rdata = m_pixel_data.at(Addr);
 
         Rdata = Rdata & (~(0xC0 >> ((X % 4)*2)));//Clear first, then set value
-        m_pixel_data.at(Addr) = Rdata | ((Color << 6) >> ((X % 4)*2));
+        m_pixel_data.at(Addr) = Rdata | ((val << 6) >> ((X % 4)*2));
     }else if(Scale == 7){
         uint32_t Addr = X / 2  + Y * WidthByte;
         uint8_t Rdata = m_pixel_data.at(Addr);
         Rdata = Rdata & (~(0xF0 >> ((X % 2)*4)));//Clear first, then set value
-        m_pixel_data.at(Addr) = Rdata | ((Color << 4) >> ((X % 2)*4));
+        m_pixel_data.at(Addr) = Rdata | ((val << 4) >> ((X % 2)*4));
         // printf("Add =  %d ,data = %d\r\n",Addr,Rdata);
     }
 }

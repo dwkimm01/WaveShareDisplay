@@ -30,7 +30,7 @@ public:
     void set
         ( const size_t x
         , const size_t y
-        , const input_pixel_t val
+        , const input_pixel_t pixel_val
         );
 
     input_pixel_t get
@@ -71,7 +71,7 @@ private:
     uint16_t Height {0};
     uint16_t WidthMemory {0};
     uint16_t HeightMemory {0};
-    uint16_t Color {0};
+//    uint16_t Color {0};
     uint16_t Rotate {0};
     uint16_t Mirror {0};
     uint16_t WidthByte {0};
