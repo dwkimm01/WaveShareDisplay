@@ -37,7 +37,7 @@ void screen_x::draw(bitmap_image & img)
             const auto xxx_val = xxx.at(y).at(x);
 
             const size_t pixel_x = img.image_width_pixels() - x_width + x;
-            const size_t pixel_y = 0; // img.image_height_pixels() - x_height + y;
+            const size_t pixel_y = y; // img.image_height_pixels() - x_height + y;
 
             if(0 != xxx_val)
                 img.set(pixel_x, pixel_y, pixel_val);

@@ -61,7 +61,7 @@ waveshare_web_service::waveshare_web_service
              std::function<void (const HttpResponsePtr &)> &&callback,
              const std::string &name)
           {
-              LOG_DEBUG << "display=" << name;
+              LOG_DEBUG << "screen=" << name;
 
               bool set_screen_result {false};
               bool draw_current_screen_result {false};
