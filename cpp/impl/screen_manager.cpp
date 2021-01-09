@@ -63,6 +63,16 @@ bool screen_manager::draw_current_screen
 
     // Clear first?
     m_current_screen->draw(m_img);
+    return true;
+}
+
+bool screen_manager::send_to_display
+    (
+    )
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    if(!m_bitmap_display_ptr)
+        return false;
     m_bitmap_display_ptr->display(m_img);
     return true;
 }
@@ -76,7 +86,6 @@ bool screen_manager::clear_current_screen
         return false;
 
     m_img.fill(val);
-    m_bitmap_display_ptr->display(m_img);
     return true;
 }
 

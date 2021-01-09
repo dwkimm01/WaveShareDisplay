@@ -35,6 +35,10 @@ public:
         (
         ) = 0;
 
+    virtual bool send_to_display
+        (
+        ) = 0;
+
     virtual bool clear_current_screen
         ( const uint8_t val
         ) = 0;

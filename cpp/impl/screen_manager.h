@@ -40,6 +40,10 @@ public:
         (
         ) override;
 
+    bool send_to_display
+        (
+        ) override;
+
     bool clear_current_screen
         ( const uint8_t val
         ) override;

@@ -75,6 +75,7 @@ waveshare_web_service::waveshare_web_service
                       if(set_screen_result)
                       {
                           draw_current_screen_result = m_screen_manager_ptr->draw_current_screen();
+                          m_screen_manager_ptr->send_to_display();
                       }
                   }
                   else
@@ -88,6 +89,7 @@ waveshare_web_service::waveshare_web_service
                               draw_current_screen_result = m_screen_manager_ptr->draw_current_screen();
                           }
                       }
+                      m_screen_manager_ptr->send_to_display();
                   }
               }
 
@@ -116,6 +118,7 @@ waveshare_web_service::waveshare_web_service
                   if(m_screen_manager_ptr)
                   {
                       clear_current_screen_result = m_screen_manager_ptr->clear_current_screen(pixel_value);
+                      m_screen_manager_ptr->send_to_display();
                   }
 
                   Json::Value json;
