@@ -3,6 +3,8 @@
 //
 
 #include <iostream>
+#include <cmath>
+#include <math.h>
 #include "screen_circle.h"
 
 namespace waveshare_eink_cpp

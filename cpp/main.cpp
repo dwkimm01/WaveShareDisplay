@@ -7,8 +7,7 @@
 #include <chrono>
 
 #include <signal.h>
-#include <cmath>
-#include <math.h>
+
 
 #include "bitmap_display_2in9.h"
 #include "bitmap_display_2in9_null.h"
