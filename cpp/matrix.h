@@ -10,7 +10,8 @@
 #include <vector>
 #include <cstdarg>
 #include <stdlib.h>
-
+namespace waveshare_eink_cpp
+{
 using mat2d = std::vector<std::vector<double> > ;
 
 class Matrix{
@@ -582,3 +583,4 @@ int main()
     }
  return 0;
 } */
+}

@@ -8,8 +8,11 @@
 
 #include "waveshare_web_service.h"
 
-
-waveshare_web_service::waveshare_web_service()
+namespace waveshare_eink_cpp
+{
+waveshare_web_service::waveshare_web_service
+    ( std::shared_ptr<i_screen_mananger> screen_manager_ptr
+    ) : m_screen_manager_ptr(screen_manager_ptr)
 {
 
 #ifdef ENABLE_DROGON
@@ -34,17 +37,33 @@ waveshare_web_service::waveshare_web_service()
           {Get,"LoginFilter"});
 
     app().registerHandler("/api/display={name}",
-          [](const HttpRequestPtr& req,
+          [&](const HttpRequestPtr& req,
              std::function<void (const HttpResponsePtr &)> &&callback,
              const std::string &name)
           {
+              LOG_DEBUG << "display=" << name;
+
+              bool set_screen_result {false};
+              bool draw_current_screen_result {false};
+
+              if(m_screen_manager_ptr)
+              {
+                  set_screen_result = m_screen_manager_ptr->set_screen(name);
+                  draw_current_screen_result = m_screen_manager_ptr->draw_current_screen();
+              }
+
               Json::Value json;
               json["result"]="ok";
               json["display"]=name;
+              json["set_screen_result"] = set_screen_result;
+              json["draw_current_screen_result"] = draw_current_screen_result;
               auto resp=HttpResponse::newHttpJsonResponse(json);
               callback(resp);
           },
           {Get,"LoginFilter"});
+
+    // Log port number
+    // Log endpoints being services
 
 
     //Run HTTP framework,the method will block in the internal event loop
@@ -52,3 +71,6 @@ waveshare_web_service::waveshare_web_service()
 #endif
 }
 
+waveshare_web_service::~waveshare_web_service() {}
+
+}

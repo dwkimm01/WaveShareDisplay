@@ -78,17 +78,28 @@ add_executable(wseink_cpp
 
         cpp/bitmap_display_2in9.cpp
         cpp/bitmap_display_2in9.h
+
+        cpp/bitmap_display_2in9_null.cpp
+        cpp/bitmap_display_2in9_null.h
+
         cpp/bitmap_image.cpp
         cpp/bitmap_image.h
         cpp/drawing.cpp
         cpp/drawing.h
-        cpp/i_bitmap_display.h
-        cpp/i_screen
-        cpp/i_screen_manager.h
+
+        cpp/impl/screens/screen_circle.cpp
+        cpp/impl/screens/screen_circle.h
+        cpp/impl/screens/screen_square.cpp
+        cpp/impl/screens/screen_square.h
+
+        cpp/interfaces/i_bitmap_display.h
+        cpp/interfaces/i_screen.h
+        cpp/interfaces/i_screen_manager.h
+
         cpp/main.cpp
         cpp/matrix.h
-        cpp/screen_manager.cpp
-        cpp/screen_manager.h
+        cpp/impl/screen_manager.cpp
+        cpp/impl/screen_manager.h
         cpp/waveshare_web_service.cpp
         cpp/waveshare_web_service.h
     )
@@ -96,6 +107,7 @@ add_executable(wseink_cpp
 target_include_directories(wseink_cpp PUBLIC
         c/lib/Config
         c/lib/GUI
+        cpp
     )
 target_link_libraries(wseink_cpp PUBLIC ${wiringPi_LIB})
 

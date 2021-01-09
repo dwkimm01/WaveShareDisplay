@@ -11,10 +11,14 @@
 #include <math.h>
 
 #include "bitmap_display_2in9.h"
+#include "bitmap_display_2in9_null.h"
 #include "drawing.h"
 #include "../c/lib/Fonts/fonts.h"
-#include "matrix.h"
 #include "waveshare_web_service.h"
+
+#include "impl/screen_manager.h"
+#include "impl/screens/screen_circle.h"
+#include "impl/screens/screen_square.h"
 
 void display_test()
 {
@@ -33,32 +37,6 @@ void display_test()
     //for(int i = 0; i < m; ++i)
     //   b.set(i, i, 1);
 
-    // Display circle in upper left
-    for(size_t x = 0; x < 10; ++x)
-    {
-        for(size_t y = 0; y < 10; ++y)
-        {
-            const double x_center {5.0};
-            const double y_center {5.0};
-            const double radius {5.0};
-
-            if(radius > sqrt(
-                    pow(x_center - x, 2) + pow(y_center - y, 2)
-            ))
-            {
-                b.set(x, y, 1);
-            }
-        }
-    }
-
-    // Display box in lower right
-    for(size_t x = b.image_width_pixels()-10; x < b.image_width_pixels(); ++x)
-    {
-        for(size_t y = b.image_height_pixels()-10; y < b.image_height_pixels(); ++y)
-        {
-            b.set(x, y, 1);
-        }
-    }
 
     {
         // Display diamond in lower left
@@ -223,10 +201,32 @@ void display_test()
 int main(int argc, char* argv[])
 {
     using namespace std;
+    using namespace waveshare_eink_cpp;
     cout << "Starting...\n";
 
+    // Exception handling:ctrl + c
+    signal(SIGINT, bitmap_display_2in9::exit_handler);
+    // Bitmap display
+    std::shared_ptr<i_bitmap_display> bitmap_display;
+    try
+    {
+        bitmap_display = std::make_shared<bitmap_display_2in9>();
+    }
+    catch(const std::exception & e)
+    {
+        std::cout << "Exception creating display, using null display\n";
+        bitmap_display = std::make_shared<bitmap_display_2in9_null>();
+    }
+    // Screen manager
+    std::shared_ptr<i_screen_mananger> screen_manager_ptr = std::make_shared<screen_manager>(bitmap_display);
+
+    // Screens
+    screen_manager_ptr->add_screen("circle", std::shared_ptr<i_screen>(new screen_circle()));
+    screen_manager_ptr->add_screen("square", std::shared_ptr<i_screen>(new screen_square()));
+
+
 #ifdef ENABLE_DROGON
-    waveshare_web_service s;
+    waveshare_web_service s(screen_manager_ptr);
 #else
     display_test();
 #endif

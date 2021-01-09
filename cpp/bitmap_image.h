@@ -67,16 +67,16 @@ public:
     };
 
 private:
-    uint16_t Width;
-    uint16_t Height;
-    uint16_t WidthMemory;
-    uint16_t HeightMemory;
-    uint16_t Color;
-    uint16_t Rotate;
-    uint16_t Mirror;
-    uint16_t WidthByte;
-    uint16_t HeightByte;
-    uint16_t Scale;
+    uint16_t Width {0};
+    uint16_t Height {0};
+    uint16_t WidthMemory {0};
+    uint16_t HeightMemory {0};
+    uint16_t Color {0};
+    uint16_t Rotate {0};
+    uint16_t Mirror {0};
+    uint16_t WidthByte {0};
+    uint16_t HeightByte {0};
+    uint16_t Scale {0};
     std::vector<unsigned char> m_pixel_data;
 };
 

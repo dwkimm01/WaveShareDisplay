@@ -5,7 +5,7 @@
 #ifndef E_PAPER_BITMAP_DISPLAY_2IN9_H
 #define E_PAPER_BITMAP_DISPLAY_2IN9_H
 
-#include "i_bitmap_display.h"
+#include "interfaces/i_bitmap_display.h"
 
 namespace waveshare_eink_cpp
 {

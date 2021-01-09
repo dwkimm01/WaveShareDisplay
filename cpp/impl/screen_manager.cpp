@@ -4,12 +4,23 @@
 
 #include "screen_manager.h"
 
+namespace waveshare_eink_cpp
+{
+
+screen_manager::screen_manager(std::shared_ptr<i_bitmap_display> bitmap_display_ptr)
+    : m_bitmap_display_ptr(bitmap_display_ptr)
+    , m_img(bitmap_display_ptr->create_image())
+{
+}
+
+screen_manager::~screen_manager() {}
 
 bool screen_manager::add_screen
     ( const std::string & screen_name
     , std::shared_ptr<i_screen> screen_ptr
     )
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
     auto res = m_screen_map.emplace(std::make_pair(screen_name, screen_ptr));
     return std::get<1>(res);
 }
@@ -19,6 +30,7 @@ bool screen_manager::rem_screen
     , std::shared_ptr<i_screen> & screen_ptr
     )
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
     auto itr = m_screen_map.find(screen_name);
     if(itr == m_screen_map.end())
         return false;
@@ -31,10 +43,28 @@ bool screen_manager::set_screen
     ( const std::string & screen_name
     )
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
     auto itr = m_screen_map.find(screen_name);
     if(itr == m_screen_map.end())
         return false;
-    itr->second->update_screen();
+    m_current_screen = itr->second;
     return true;
 }
 
+bool screen_manager::draw_current_screen
+    (
+    )
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    if(!m_current_screen)
+        return false;
+    if(!m_bitmap_display_ptr)
+        return false;
+
+    // Clear first?
+    m_current_screen->draw(m_img);
+    m_bitmap_display_ptr->display(m_img);
+    return true;
+}
+
+}

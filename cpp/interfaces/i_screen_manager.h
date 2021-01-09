@@ -8,7 +8,10 @@
 #include <string>
 #include <memory>
 #include "i_screen.h"
+#include "bitmap_image.h"
 
+namespace waveshare_eink_cpp
+{
 class i_screen_mananger
 {
 public:
@@ -27,6 +30,10 @@ public:
     virtual bool set_screen
         ( const std::string & screen_name
         ) = 0;
-};
 
+    virtual bool draw_current_screen
+        (
+        ) = 0;
+};
+}
 #endif //WSEINK_CPP_I_DISPLAY_MANAGER_H
