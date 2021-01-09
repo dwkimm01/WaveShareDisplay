@@ -85,7 +85,6 @@ void bitmap_display_2in9::sleep()
 
 void bitmap_display_2in9::display(const bitmap_image & b)
 {
-//    EPD_2IN9_Display(UBYTE *Image)
     EPD_2IN9_Display(const_cast<unsigned char*>(b.data()));
 }
 
