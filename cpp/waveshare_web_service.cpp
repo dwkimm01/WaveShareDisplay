@@ -33,8 +33,21 @@ waveshare_web_service::waveshare_web_service()
           },
           {Get,"LoginFilter"});
 
+    app().registerHandler("/api/display={name}",
+          [](const HttpRequestPtr& req,
+             std::function<void (const HttpResponsePtr &)> &&callback,
+             const std::string &name)
+          {
+              Json::Value json;
+              json["result"]="ok";
+              json["display"]=name;
+              auto resp=HttpResponse::newHttpJsonResponse(json);
+              callback(resp);
+          },
+          {Get,"LoginFilter"});
 
-        //Run HTTP framework,the method will block in the internal event loop
+
+    //Run HTTP framework,the method will block in the internal event loop
         drogon::app().run();
 #endif
 }

@@ -83,7 +83,12 @@ add_executable(wseink_cpp
         cpp/drawing.cpp
         cpp/drawing.h
         cpp/i_bitmap_display.h
+        cpp/i_screen
+        cpp/i_screen_manager.h
         cpp/main.cpp
+        cpp/matrix.h
+        cpp/screen_manager.cpp
+        cpp/screen_manager.h
         cpp/waveshare_web_service.cpp
         cpp/waveshare_web_service.h
     )
