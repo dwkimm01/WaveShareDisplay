@@ -67,4 +67,17 @@ bool screen_manager::draw_current_screen
     return true;
 }
 
+bool screen_manager::clear_current_screen
+    ( const uint8_t val
+    )
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    if(!m_bitmap_display_ptr)
+        return false;
+
+    m_img.fill(val);
+    m_bitmap_display_ptr->display(m_img);
+    return true;
+}
+
 }

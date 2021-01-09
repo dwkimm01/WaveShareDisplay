@@ -40,6 +40,10 @@ public:
         (
         ) override;
 
+    bool clear_current_screen
+        ( const uint8_t val
+        ) override;
+
 private:
     std::shared_ptr<i_bitmap_display> m_bitmap_display_ptr;
     bitmap_image m_img;

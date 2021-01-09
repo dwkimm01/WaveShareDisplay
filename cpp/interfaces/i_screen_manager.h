@@ -34,6 +34,10 @@ public:
     virtual bool draw_current_screen
         (
         ) = 0;
+
+    virtual bool clear_current_screen
+        ( const uint8_t val
+        ) = 0;
 };
 }
 #endif //WSEINK_CPP_I_DISPLAY_MANAGER_H

@@ -39,7 +39,7 @@ public:
         ) const;
 
     void fill
-        ( unsigned char v
+        ( const input_pixel_t val
         );
 
     unsigned char const* data

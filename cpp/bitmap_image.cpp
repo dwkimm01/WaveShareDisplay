@@ -119,38 +119,25 @@ void bitmap_image::set
         // printf("Add =  %d ,data = %d\r\n",Addr,Rdata);
     }
 }
-#if 0
-{
-    auto X = x;
-    auto Y = y;
-    if(m_scale == 2)
-    {
-        size_t Addr = X / 8 + Y * m_width_byte; // Paint.WidthByte;
-        unsigned char Rdata = m_pixel_data.at(Addr);
-        m_pixel_data.at(Addr) = Rdata | (0x80 >> (X % 8));
-//        if(Color == BLACK)
-//            Paint.Image[Addr] = Rdata & ~(0x80 >> (X % 8));
-//        else
-//            Paint.Image[Addr] = Rdata | (0x80 >> (X % 8));
-    }
-    else
-    {
-        throw std::runtime_error("Unsupported scale set");
-    }
-}
-#endif
 
 bitmap_image::input_pixel_t bitmap_image::get
     ( const size_t x
     , const size_t y
     ) const
 {
-   return 0;
+    // TODO
+    return 0;
 }
 
-void bitmap_image::fill(unsigned char v)
+void bitmap_image::fill(const input_pixel_t val)
 {
-    std::fill(m_pixel_data.begin(), m_pixel_data.end(), v);
+    for(int y = 0; y < Height; ++y)
+    {
+        for(int x = 0; x < Width; ++x)
+        {
+            set(x, y, val);
+        }
+    }
 }
 
 unsigned char const* bitmap_image::data

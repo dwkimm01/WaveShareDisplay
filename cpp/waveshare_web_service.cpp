@@ -62,12 +62,55 @@ waveshare_web_service::waveshare_web_service
           },
           {Get,"LoginFilter"});
 
+    app().registerHandler("/api/clear={value}",
+              [&](const HttpRequestPtr& req,
+                  std::function<void (const HttpResponsePtr &)> &&callback,
+                  const std::string &value)
+              {
+                  LOG_DEBUG << "display=" << value;
+
+                  const uint8_t pixel_value = std::stoi(value);
+
+                  bool clear_current_screen_result {false};
+                  bool draw_current_screen_result {false};
+
+                  if(m_screen_manager_ptr)
+                  {
+                      clear_current_screen_result = m_screen_manager_ptr->clear_current_screen(pixel_value);
+                      draw_current_screen_result = m_screen_manager_ptr->draw_current_screen();
+                  }
+
+                  Json::Value json;
+                  json["result"]="ok";
+                  json["clear"]=value;
+                  json["clear_current_screen_result"] = clear_current_screen_result;
+                  json["draw_current_screen_result"] = draw_current_screen_result;
+                  auto resp=HttpResponse::newHttpJsonResponse(json);
+                  callback(resp);
+              },
+              {Get,"LoginFilter"});
+
+    app().registerHandler("/api/shutdown",
+          [&](const HttpRequestPtr& req,
+              std::function<void (const HttpResponsePtr &)> &&callback)
+          {
+              LOG_DEBUG << "shutdown";
+
+              Json::Value json;
+              json["result"]="ok";
+              json["shutdown"]=true;
+              auto resp=HttpResponse::newHttpJsonResponse(json);
+              callback(resp);
+              drogon::app().quit();
+          },
+          {Get,"LoginFilter"});
+
     // Log port number
     // Log endpoints being services
 
-
     //Run HTTP framework,the method will block in the internal event loop
-        drogon::app().run();
+    drogon::app().run();
+
 #endif
 }
 
