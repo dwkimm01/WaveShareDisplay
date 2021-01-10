@@ -45,8 +45,8 @@ void screen_bender::draw(bitmap_image & img)
     const int teeth_row_step = max_y * 1.0 / teeth_rows;
     for(int teeth_row = 0; teeth_row < teeth_rows; ++ teeth_row)
     {
-        int pixel_y = (teeth_row+1) * teeth_row;
-        for(int pixel_x = 0; pixel_x < teeth_rows; ++pixel_x)
+        int pixel_y = (teeth_row+1) * teeth_row_step;
+        for(int pixel_x = 0; pixel_x < max_x; ++pixel_x)
         {
             img.set(pixel_x, pixel_y, pixel_val);
         }
