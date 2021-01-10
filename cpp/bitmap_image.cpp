@@ -100,6 +100,10 @@ void bitmap_image::set
     if(Scale == 2)
     {
         uint16_t Addr = X / 8 + Y * WidthByte;
+
+        if(Addr >= m_pixel_data.size())
+            return;
+
         uint16_t Rdata = m_pixel_data.at(Addr);
         if(val == CBLACK)
             m_pixel_data.at(Addr) = Rdata & ~(0x80 >> (X % 8));
@@ -107,6 +111,10 @@ void bitmap_image::set
             m_pixel_data.at(Addr) = Rdata | (0x80 >> (X % 8));
     }else if(Scale == 4){
         uint32_t Addr = X / 4 + Y * WidthByte;
+
+        if(Addr >= m_pixel_data.size())
+            return;
+
         val = val % 4;//Guaranteed color scale is 4  --- 0~3
         uint8_t Rdata = m_pixel_data.at(Addr);
 
@@ -114,6 +122,10 @@ void bitmap_image::set
         m_pixel_data.at(Addr) = Rdata | ((val << 6) >> ((X % 4)*2));
     }else if(Scale == 7){
         uint32_t Addr = X / 2  + Y * WidthByte;
+
+        if(Addr >= m_pixel_data.size())
+            return;
+
         uint8_t Rdata = m_pixel_data.at(Addr);
         Rdata = Rdata & (~(0xF0 >> ((X % 2)*4)));//Clear first, then set value
         m_pixel_data.at(Addr) = Rdata | ((val << 4) >> ((X % 2)*4));
