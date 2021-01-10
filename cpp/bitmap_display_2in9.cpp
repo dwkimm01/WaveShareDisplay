@@ -27,7 +27,7 @@ namespace waveshare_eink_cpp
 {
 void bitmap_display_2in9::exit_handler(int signo)
 {
-    //System Exit
+    // System Exit
     std::cout << "Exit handler: calling dev module exit" << std::endl;
     DEV_Module_Exit();
     exit(0);
@@ -93,6 +93,7 @@ bitmap_image bitmap_display_2in9::create_image()
     bitmap_image b
         ( width_pixels()
         , height_pixels()
+        , bitmap_image::MIRROR_HORIZONTAL
         , bitmap_image::ROT_90
         , bitmap_image::CWHITE
         );
@@ -116,13 +117,6 @@ void bitmap_display_2in9::display_init(bool full)
 void bitmap_display_2in9::display_sleep()
 {
     EPD_2IN9_Sleep();
-/*
-    EPD_2IN9_SendCommand(0x10);
-    EPD_2IN9_SendData(0x01);
-    // EPD_2IN9_ReadBusy();
-*/
 }
-
-
 
 }

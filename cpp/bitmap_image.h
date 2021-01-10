@@ -16,10 +16,31 @@ class bitmap_image
 public:
     typedef uint16_t input_pixel_t;
 
+    enum color_t
+    { CWHITE = 0xFF
+    , CBLACK = 0x00
+    , CRED = 0x00
+    };
+
+    enum mirror_t
+    { MIRROR_NONE = 0x00
+    , MIRROR_HORIZONTAL = 0x01
+    , MIRROR_VERTICAL = 0x02
+    , MIRROR_ORIGIN = 0x03
+    };
+
+    enum rotate_t
+    { ROT_0 = 0
+    , ROT_90 = 90
+    , ROT_180 = 180
+    , ROT_270 = 270
+    };
+
     bitmap_image
         ( const size_t image_width_pixels
         , const size_t image_height_pixels
-        , const uint16_t rotate
+        , const mirror_t mirror
+        , const rotate_t rotate
         , const uint16_t color
         );
 
@@ -46,25 +67,7 @@ public:
         (
         ) const;
 
-    enum color_t
-    { CWHITE = 0xFF
-    , CBLACK = 0x00
-    , CRED = 0x00
-    };
 
-    enum mirror_t
-    { MIRROR_NONE = 0x00
-    , MIRROR_HORIZONTAL = 0x01
-    , MIRROR_VERTICAL = 0x02
-    , MIRROR_ORIGIN = 0x03
-    };
-
-    enum rotate_t
-    { ROT_0 = 0
-    , ROT_90 = 90
-    , ROT_180 = 180
-    , ROT_270 = 270
-    };
 
 private:
     uint16_t Width {0};
@@ -72,8 +75,8 @@ private:
     uint16_t WidthMemory {0};
     uint16_t HeightMemory {0};
 //    uint16_t Color {0};
-    uint16_t Rotate {0};
     uint16_t Mirror {0};
+    uint16_t Rotate {0};
     uint16_t WidthByte {0};
     uint16_t HeightByte {0};
     uint16_t Scale {0};

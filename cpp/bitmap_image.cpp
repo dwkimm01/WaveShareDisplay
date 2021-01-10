@@ -12,7 +12,8 @@ namespace waveshare_eink_cpp
 bitmap_image::bitmap_image
     ( const size_t image_width_pixels
     , const size_t image_height_pixels
-    , const uint16_t rotate
+    , const mirror_t mirror
+    , const rotate_t rotate
     , const uint16_t color
     ) : WidthMemory(image_width_pixels)
       , HeightMemory(image_height_pixels)
@@ -20,8 +21,8 @@ bitmap_image::bitmap_image
       , Scale(2)
       , WidthByte((image_width_pixels % 8 == 0)? (image_width_pixels / 8 ): (image_width_pixels / 8 + 1))
       , HeightByte(image_height_pixels)
+      , Mirror(mirror)
       , Rotate(rotate)
-      , Mirror(MIRROR_NONE)
 {
     if(Rotate == ROT_0 || Rotate == ROT_180)
     {
