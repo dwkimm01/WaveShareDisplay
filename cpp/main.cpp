@@ -16,11 +16,15 @@
 #include "waveshare_web_service.h"
 
 #include "impl/screen_manager.h"
+#include "impl/screens/screen_bender.h"
 #include "impl/screens/screen_circle.h"
 #include "impl/screens/screen_diamond.h"
 #include "impl/screens/screen_square.h"
+#include "impl/screens/screen_widgets.h"
 #include "impl/screens/screen_x.h"
-#include "impl/screens/screen_bender.h"
+
+#include "impl/bitmaps.h"
+#include "impl/widget_bitmap.h"
 
 void display_test()
 {
@@ -50,18 +54,18 @@ void display_test()
     // Text
     drawing::Paint_DrawString_EN
             (b, 0, 0, "Hello"
-                    , &Font16, drawing::d_WHITE
-                    , drawing::d_BLACK
+            , &Font16, drawing::d_WHITE
+            , drawing::d_BLACK
             );
 
 
     // Number
     drawing::Paint_DrawNum // TODO, doesn't seem to be displaying?
             (b
-                    , 120, 10
-                    , 187, &Font16
-                    , drawing::d_WHITE
-                    , drawing::d_BLACK
+            , 120, 10
+            , 187, &Font16
+            , drawing::d_WHITE
+            , drawing::d_BLACK
             );
 
 
@@ -169,6 +173,13 @@ int main(int argc, char* argv[])
     screen_manager_ptr->add_screen("square", std::shared_ptr<i_screen>(new screen_square()));
     screen_manager_ptr->add_screen("x", std::shared_ptr<i_screen>(new screen_x()));
     screen_manager_ptr->add_screen("bender", std::shared_ptr<i_screen>(new screen_bender()));
+
+
+    bitmaps bmp;
+    auto screen_widgets_ptr = std::make_shared<screen_widgets>(std::shared_ptr<i_widget>(new widget_bitmap(bmp.get("play"), 30, 30)));
+
+    screen_manager_ptr->add_screen("widgets", std::shared_ptr<i_screen>(screen_widgets_ptr));
+
 
 #ifdef ENABLE_DROGON
     waveshare_web_service s(screen_manager_ptr);

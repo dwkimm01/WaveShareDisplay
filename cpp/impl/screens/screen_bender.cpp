@@ -53,23 +53,6 @@ void screen_bender::draw(bitmap_image & img)
     }
 
 
-
-//    // Display circle in upper left
-//    for(size_t x = 0; x < 10; ++x)
-//    {
-//        for(size_t y = 0; y < 10; ++y)
-//        {
-//
-//            if(radius > sqrt
-//                    ( pow(x_center - x, 2)
-//                      + pow(y_center - y, 2)
-//                    ))
-//            {
-//                img.set(x, y, pixel_val);
-//            }
-//        }
-//    }
-
 }
 
 }
