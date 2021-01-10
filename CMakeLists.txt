@@ -87,23 +87,32 @@ add_executable(wseink_cpp
         cpp/drawing.cpp
         cpp/drawing.h
 
+        cpp/impl/screens/screen_bender.cpp
+        cpp/impl/screens/screen_bender.h
         cpp/impl/screens/screen_circle.cpp
         cpp/impl/screens/screen_circle.h
         cpp/impl/screens/screen_diamond.cpp
         cpp/impl/screens/screen_diamond.h
         cpp/impl/screens/screen_square.cpp
         cpp/impl/screens/screen_square.h
+        cpp/impl/screens/screen_widgets.cpp
+        cpp/impl/screens/screen_widgets.h
         cpp/impl/screens/screen_x.cpp
         cpp/impl/screens/screen_x.h
+
+        cpp/impl/screen_manager.cpp
+        cpp/impl/screen_manager.h
+        cpp/impl/widget_bitmap.cpp
+        cpp/impl/widget_bitmap.h
 
         cpp/interfaces/i_bitmap_display.h
         cpp/interfaces/i_screen.h
         cpp/interfaces/i_screen_manager.h
+        cpp/interfaces/i_widget.h
 
         cpp/main.cpp
         cpp/matrix.h
-        cpp/impl/screen_manager.cpp
-        cpp/impl/screen_manager.h
+
         cpp/waveshare_web_service.cpp
         cpp/waveshare_web_service.h
     )

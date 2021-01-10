@@ -20,6 +20,7 @@
 #include "impl/screens/screen_diamond.h"
 #include "impl/screens/screen_square.h"
 #include "impl/screens/screen_x.h"
+#include "impl/screens/screen_bender.h"
 
 void display_test()
 {
@@ -167,6 +168,7 @@ int main(int argc, char* argv[])
     screen_manager_ptr->add_screen("diamond", std::shared_ptr<i_screen>(new screen_diamond()));
     screen_manager_ptr->add_screen("square", std::shared_ptr<i_screen>(new screen_square()));
     screen_manager_ptr->add_screen("x", std::shared_ptr<i_screen>(new screen_x()));
+    screen_manager_ptr->add_screen("bender", std::shared_ptr<i_screen>(new screen_bender()));
 
 #ifdef ENABLE_DROGON
     waveshare_web_service s(screen_manager_ptr);

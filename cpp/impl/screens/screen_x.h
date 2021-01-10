@@ -16,7 +16,7 @@ public:
 
     virtual ~screen_x();
 
-    virtual void draw(bitmap_image & img) override;
+    void draw(bitmap_image & img) override;
 };
 
 }
