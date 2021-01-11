@@ -93,8 +93,8 @@ bitmap_image bitmap_display_2in9::create_image()
     bitmap_image b
         ( width_pixels()
         , height_pixels()
-        , bitmap_image::MIRROR_NONE
-        , bitmap_image::ROT_0
+        , bitmap_image::MIRROR_VERTICAL
+        , bitmap_image::ROT_90
         , bitmap_image::CWHITE
         );
 
@@ -103,6 +103,13 @@ bitmap_image bitmap_display_2in9::create_image()
      * /------------\
      * |            | wires
      * |           +| wires
+     * \------------/
+     *
+     * MIRROR_NONE + ROT_0 - but it's facing "down" instead of towards the middle of the screen
+     *
+     * /------------\
+     * |+           | wires
+     * |            | wires
      * \------------/
      */
 
