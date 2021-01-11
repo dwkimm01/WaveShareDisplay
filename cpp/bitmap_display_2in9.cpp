@@ -106,11 +106,17 @@ bitmap_image bitmap_display_2in9::create_image()
      * \------------/
      *
      * MIRROR_NONE + ROT_0 - but it's facing "down" instead of towards the middle of the screen
-     *
      * /------------\
      * |+           | wires
      * |            | wires
      * \------------/
+     *
+     * MIRROR_VERT + ROT_90 - Perfect for music robot (face) layout
+     * /------------\
+     * |+           | wires
+     * |            | wires
+     * \------------/
+
      */
 
     return b;
