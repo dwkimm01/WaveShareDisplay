@@ -93,10 +93,19 @@ bitmap_image bitmap_display_2in9::create_image()
     bitmap_image b
         ( width_pixels()
         , height_pixels()
-        , bitmap_image::MIRROR_HORIZONTAL
-        , bitmap_image::ROT_90
+        , bitmap_image::MIRROR_NONE
+        , bitmap_image::ROT_0
         , bitmap_image::CWHITE
         );
+
+    /**
+     * MIRROR_HORIZONTAL + ROT_90
+     * /------------\
+     * |            | wires
+     * |           +| wires
+     * \------------/
+     */
+
     return b;
 }
 
