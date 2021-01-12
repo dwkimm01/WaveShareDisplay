@@ -44,20 +44,12 @@ void display_test()
     //for(int i = 0; i < m; ++i)
     //   b.set(i, i, 1);
 
-
-
-
     // Display...
     // - checkerboard pattern
     // - gradient pattern
     // - cool info
 
-    // Text
-    drawing::Paint_DrawString_EN
-            (b, 0, 0, "Hello"
-            , &Font16, drawing::d_WHITE
-            , drawing::d_BLACK
-            );
+
 
 
     // Number

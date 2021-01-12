@@ -25,10 +25,14 @@ void widget_string::update() {}
 void widget_string::draw(bitmap_image & img)
 {
     drawing::Paint_DrawString_EN
-            (img, m_x, m_y, m_text.c_str()
-                    , &Font16, drawing::d_WHITE
-                    , drawing::d_BLACK
-            );
+        (img
+        , m_x
+        , m_y
+        , m_text.c_str()
+        , &Font8
+        , drawing::d_WHITE
+        , drawing::d_BLACK
+        );
 }
 
 size_t widget_string::x() const { return m_x; }
