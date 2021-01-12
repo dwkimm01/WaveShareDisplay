@@ -169,8 +169,8 @@ int main(int argc, char* argv[])
 
 
     bitmaps bmp;
-    auto widget_bmp_ptr = std::shared_ptr<widget_bitmap>(new widget_bitmap(bmp.get("play"), 30, 30));
-    auto widget_string_ptr = std::shared_ptr<widget_string>(new widget_string("Judah", 50, 50));
+    auto widget_bmp_ptr = std::shared_ptr<widget_bitmap>(new widget_bitmap(bmp.get("play"), 1, 1));
+    auto widget_string_ptr = std::shared_ptr<widget_string>(new widget_string("Judah", 10, 10));
     std::vector<std::shared_ptr<i_widget>> widget_vec {widget_bmp_ptr, widget_string_ptr};
     auto screen_widgets_ptr = std::make_shared<screen_widgets>(widget_vec);
 
