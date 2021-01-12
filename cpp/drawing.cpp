@@ -50,7 +50,7 @@ void drawing::Paint_DrawChar
 
         for (Column = 0; Column < Font->Width; Column ++ ) {
 
-            std::cout << "CHAR PAINT(" << Xpoint + Column << ", " << Ypoint + mirror_val << ")" << std::endl;
+//            std::cout << "CHAR PAINT(" << Xpoint + Column << ", " << Ypoint + mirror_val << ")" << std::endl;
 
             //To determine whether the font background color and screen background color is consistent
             if (FONT_BACKGROUND == Color_Background) { //this process is to speed up the scan

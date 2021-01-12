@@ -98,7 +98,7 @@ void bitmap_image::set
         return; // Exceeding display boundaries
     }
 
-    std::cout << "    SET(" << X << ", " << Y << ")" << std::endl;
+//    std::cout << "    SET(" << X << ", " << Y << ")" << std::endl;
     if(Scale == 2)
     {
         uint16_t Addr = X / 8 + Y * WidthByte;

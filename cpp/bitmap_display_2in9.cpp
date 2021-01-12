@@ -95,9 +95,8 @@ bitmap_image bitmap_display_2in9::create_image()
         , height_pixels()
 //        , bitmap_image::MIRROR_VERTICAL // kind of works
 //        , bitmap_image::ROT_90
-    , bitmap_image::MIRROR_NONE  // No that's weird
-    , bitmap_image::ROT_270
-
+        , bitmap_image::MIRROR_NONE  // No that's weird
+        , bitmap_image::ROT_270
         , bitmap_image::CWHITE
         );
 
@@ -119,7 +118,7 @@ bitmap_image bitmap_display_2in9::create_image()
      * |+           | wires
      * |            | wires
      * \------------/
-
+     *
      */
 
     return b;
