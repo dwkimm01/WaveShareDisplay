@@ -28,8 +28,8 @@ void widget_string::draw(bitmap_image & img)
 size_t widget_string::x() const { return m_x; }
 size_t widget_string::y() const { return m_y; }
 
-size_t & widget_string::x() {}
-size_t & widget_string::y() {}
+size_t & widget_string::x() { return m_x; }
+size_t & widget_string::y() { return m_y; }
 
 uint8_t widget_string::color_foreground() const { return m_color_foreground; }
 uint8_t & widget_string::color_foreground() { return m_color_foreground; }
