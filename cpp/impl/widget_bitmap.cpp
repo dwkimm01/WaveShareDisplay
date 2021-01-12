@@ -62,7 +62,8 @@ void widget_bitmap::draw(bitmap_image & img)
             const auto diamond_val = m_bitmap.at(y).at(x);
 
             const size_t pixel_x = x;
-            const size_t pixel_y = img.image_height_pixels() - bitmap_height + y;
+//            const size_t pixel_y = img.image_height_pixels() - bitmap_height + y;
+            const size_t pixel_y = y;
 
             if(diamond_val)
             {
