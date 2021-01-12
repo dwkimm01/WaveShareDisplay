@@ -29,7 +29,7 @@ void widget_string::draw(bitmap_image & img)
         , m_x
         , m_y
         , m_text.c_str()
-        , &Font8
+        , &Font12
         , drawing::d_WHITE
         , drawing::d_BLACK
         );

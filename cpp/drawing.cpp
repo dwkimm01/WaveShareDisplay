@@ -37,20 +37,28 @@ void drawing::Paint_DrawChar
     uint32_t Char_Offset = (Acsii_Char - ' ') * Font->Height * (Font->Width / 8 + (Font->Width % 8 ? 1 : 0));
     const unsigned char *ptr = &Font->table[Char_Offset];
 
+
     for (Page = 0; Page < Font->Height; Page ++ ) {
+
+        int mirror_val = Page;
+        if(img.mirror() == bitmap_image::MIRROR_VERTICAL)
+        {
+            mirror_val = Font->Height - Page;
+        }
+
         for (Column = 0; Column < Font->Width; Column ++ ) {
 
             //To determine whether the font background color and screen background color is consistent
             if (FONT_BACKGROUND == Color_Background) { //this process is to speed up the scan
                 if (*ptr & (0x80 >> (Column % 8)))
-                    img.set(Xpoint + Column, Ypoint + Page, Color_Foreground);
+                    img.set(Xpoint + Column, Ypoint + mirror_val, Color_Foreground);
                 // Paint_DrawPoint(Xpoint + Column, Ypoint + Page, Color_Foreground, DOT_PIXEL_DFT, DOT_STYLE_DFT);
             } else {
                 if (*ptr & (0x80 >> (Column % 8))) {
-                    img.set(Xpoint + Column, Ypoint + Page, Color_Foreground);
+                    img.set(Xpoint + Column, Ypoint + mirror_val, Color_Foreground);
                     // Paint_DrawPoint(Xpoint + Column, Ypoint + Page, Color_Foreground, DOT_PIXEL_DFT, DOT_STYLE_DFT);
                 } else {
-                    img.set(Xpoint + Column, Ypoint + Page, Color_Background);
+                    img.set(Xpoint + Column, Ypoint + mirror_val, Color_Background);
                     // Paint_DrawPoint(Xpoint + Column, Ypoint + Page, Color_Background, DOT_PIXEL_DFT, DOT_STYLE_DFT);
                 }
             }
@@ -94,7 +102,15 @@ void drawing::Paint_DrawString_EN
             Xpoint = Xstart;
             Ypoint = Ystart;
         }
-        drawing::Paint_DrawChar(img, Xpoint, Ypoint, * pString, Font, Color_Background, Color_Foreground);
+        drawing::Paint_DrawChar
+            (img
+            , Xpoint
+            , Ypoint
+            , * pString
+            , Font
+            , Color_Background
+            , Color_Foreground
+            );
 
         //The next character of the address
         pString ++;

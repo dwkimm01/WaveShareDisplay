@@ -247,5 +247,11 @@ unsigned char const* bitmap_image::data
     return m_pixel_data.data();
 }
 
+bitmap_image::mirror_t& bitmap_image::mirror() { return Mirror; }
+bitmap_image::mirror_t bitmap_image::mirror() const { return Mirror; }
+bitmap_image::rotate_t& bitmap_image::rotate() { return Rotate; }
+bitmap_image::rotate_t bitmap_image::rotate() const { return Rotate; }
+
+
 
 }

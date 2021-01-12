@@ -68,18 +68,20 @@ public:
         ) const;
 
 
-    void mirror(const mirror_t m);
+    // TODO fix these as they don't retroactively fix the screen
+    mirror_t& mirror();
+    mirror_t mirror() const;
+    rotate_t& rotate();
+    rotate_t rotate() const;
 
-    void rotate(const rotate_t r);
 
 private:
     uint16_t Width {0};
     uint16_t Height {0};
     uint16_t WidthMemory {0};
     uint16_t HeightMemory {0};
-//    uint16_t Color {0};
-    uint16_t Mirror {0};
-    uint16_t Rotate {0};
+    mirror_t Mirror {MIRROR_NONE};
+    rotate_t Rotate {ROT_0};
     uint16_t WidthByte {0};
     uint16_t HeightByte {0};
     uint16_t Scale {0};
