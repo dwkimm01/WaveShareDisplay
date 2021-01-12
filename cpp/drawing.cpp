@@ -2,6 +2,7 @@
 // Created by Dave on 12/22/20.
 //
 
+#include <iostream>
 #include "drawing.h"
 
 namespace waveshare_eink_cpp
@@ -44,9 +45,12 @@ void drawing::Paint_DrawChar
         if(img.mirror() == bitmap_image::MIRROR_VERTICAL)
         {
             mirror_val = Font->Height - Page;
+            std::cout << "mirror_val = " << (int) mirror_val << std::endl;
         }
 
         for (Column = 0; Column < Font->Width; Column ++ ) {
+
+            std::cout << "CHAR PAINT(" << Xpoint + Column << ", " << Ypoint + mirror_val << ")" << std::endl;
 
             //To determine whether the font background color and screen background color is consistent
             if (FONT_BACKGROUND == Color_Background) { //this process is to speed up the scan
@@ -85,7 +89,7 @@ void drawing::Paint_DrawString_EN
     size_t Xpoint = Xstart;
     size_t Ypoint = Ystart;
 
-    if (Xstart > img.image_width_pixels() || Ystart > img.image_height_pixels()) {
+    if (Xpoint > img.image_width_pixels() || Ypoint > img.image_height_pixels()) {
 //        Debug("Paint_DrawString_EN Input exceeds the normal display range\r\n");
         return;
     }

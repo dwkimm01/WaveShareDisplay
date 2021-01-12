@@ -165,16 +165,16 @@ int main(int argc, char* argv[])
     screen_manager_ptr->add_screen("diamond", std::shared_ptr<i_screen>(new screen_diamond()));
     screen_manager_ptr->add_screen("square", std::shared_ptr<i_screen>(new screen_square()));
     screen_manager_ptr->add_screen("x", std::shared_ptr<i_screen>(new screen_x()));
-    screen_manager_ptr->add_screen("bender", std::shared_ptr<i_screen>(new screen_bender()));
+//    screen_manager_ptr->add_screen("bender", std::shared_ptr<i_screen>(new screen_bender()));
 
 
-    bitmaps bmp;
-    auto widget_bmp_ptr = std::shared_ptr<widget_bitmap>(new widget_bitmap(bmp.get("play"), 1, 1));
-    auto widget_string_ptr = std::shared_ptr<widget_string>(new widget_string("Judah", 0, 0));
-    std::vector<std::shared_ptr<i_widget>> widget_vec {widget_bmp_ptr, widget_string_ptr};
-    auto screen_widgets_ptr = std::make_shared<screen_widgets>(widget_vec);
-
-    screen_manager_ptr->add_screen("widgets", std::shared_ptr<i_screen>(screen_widgets_ptr));
+//    bitmaps bmp;
+//    auto widget_bmp_ptr = std::shared_ptr<widget_bitmap>(new widget_bitmap(bmp.get("play"), 0, 0));
+//    auto widget_string_ptr = std::shared_ptr<widget_string>(new widget_string("!", 0, 0));
+//    std::vector<std::shared_ptr<i_widget>> widget_vec {widget_bmp_ptr, widget_string_ptr};
+//    auto screen_widgets_ptr = std::make_shared<screen_widgets>(widget_vec);
+//
+//    screen_manager_ptr->add_screen("widgets", std::shared_ptr<i_screen>(screen_widgets_ptr));
 
 
 #ifdef ENABLE_DROGON

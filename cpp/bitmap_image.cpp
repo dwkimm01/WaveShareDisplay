@@ -1,7 +1,7 @@
 //
 // Created by Kimmel, David on 12/1/20.
 //
-
+#include <iostream>
 #include <algorithm>
 #include <stdexcept>
 #include "bitmap_image.h"
@@ -98,6 +98,7 @@ void bitmap_image::set
         return; // Exceeding display boundaries
     }
 
+    std::cout << "    SET(" << X << ", " << Y << ")" << std::endl;
     if(Scale == 2)
     {
         uint16_t Addr = X / 8 + Y * WidthByte;
