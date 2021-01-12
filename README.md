@@ -4,10 +4,9 @@ WaveShare 2.9" display for Judah's music box
 Started from [Waveshare](https://github.com/waveshare/e-Paper)
 
 TODO
-* Fix string widget XY not taking into account all mirror and all rotate properly
-* 
 * Make widget class and move over screen_XXX which are just examples
 * Make LMS default play only locally
+DONE * Fix string widget XY not taking into account all mirror and all rotate properly
 DONE * Update README [markdown](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
 DONE * Get [drogon](https://drogon.docsforge.com/master/getting-started/#a-very-simple-example) built
 DONE  * build and install JsonCPP
