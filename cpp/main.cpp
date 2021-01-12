@@ -25,6 +25,7 @@
 
 #include "impl/bitmaps.h"
 #include "impl/widget_bitmap.h"
+#include "impl/widget_string.h"
 
 void display_test()
 {
@@ -176,7 +177,10 @@ int main(int argc, char* argv[])
 
 
     bitmaps bmp;
-    auto screen_widgets_ptr = std::make_shared<screen_widgets>(std::shared_ptr<i_widget>(new widget_bitmap(bmp.get("play"), 30, 30)));
+    auto widget_bmp_ptr = std::shared_ptr<widget_bitmap>(new widget_bitmap(bmp.get("play"), 30, 30));
+    auto widget_string_ptr = std::shared_ptr<widget_string>(new widget_string("Judah", 50, 50));
+    std::vector<std::shared_ptr<i_widget>> widget_vec {widget_bmp_ptr, widget_string_ptr};
+    auto screen_widgets_ptr = std::make_shared<screen_widgets>(widget_vec);
 
     screen_manager_ptr->add_screen("widgets", std::shared_ptr<i_screen>(screen_widgets_ptr));
 

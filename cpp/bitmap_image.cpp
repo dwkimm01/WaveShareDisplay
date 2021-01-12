@@ -135,11 +135,97 @@ void bitmap_image::set
 }
 
 bitmap_image::input_pixel_t bitmap_image::get
-    ( const size_t x
-    , const size_t y
+    ( const size_t Xpoint
+    , const size_t Ypoint
     ) const
 {
-    // TODO
+    const input_pixel_t off_image_val {0};
+    if(Xpoint > Width || Ypoint > Height)
+    {
+        return off_image_val; // Exceeding display boundaries
+    }
+    uint16_t X, Y;
+    switch(Rotate) {
+        case 0:
+            X = Xpoint;
+            Y = Ypoint;
+            break;
+        case 90:
+            X = WidthMemory - Ypoint - 1;
+            Y = Xpoint;
+            break;
+        case 180:
+            X = WidthMemory - Xpoint - 1;
+            Y = HeightMemory - Ypoint - 1;
+            break;
+        case 270:
+            X = Ypoint;
+            Y = HeightMemory - Xpoint - 1;
+            break;
+        default:
+            return off_image_val;
+    }
+
+    switch(Mirror) {
+        case MIRROR_NONE:
+            break;
+        case MIRROR_HORIZONTAL:
+            X = WidthMemory - X - 1;
+            break;
+        case MIRROR_VERTICAL:
+            Y = HeightMemory - Y - 1;
+            break;
+        case MIRROR_ORIGIN:
+            X = WidthMemory - X - 1;
+            Y = HeightMemory - Y - 1;
+            break;
+        default:
+            return off_image_val;
+    }
+
+    if(X > WidthMemory || Y > HeightMemory)
+    {
+        return off_image_val; // Exceeding display boundaries
+    }
+
+    if(Scale == 2)
+    {
+        uint16_t Addr = X / 8 + Y * WidthByte;
+
+        if(Addr >= m_pixel_data.size())
+            return off_image_val;
+
+        uint16_t Rdata = m_pixel_data.at(Addr);
+        return Rdata & ~(0x80 >> (X % 8)); // TODO
+//        if(val == CBLACK)
+//            return Rdata & ~(0x80 >> (X % 8));
+//        else
+//            return Rdata | (0x80 >> (X % 8));
+    }else if(Scale == 4){
+        uint32_t Addr = X / 4 + Y * WidthByte;
+
+        if(Addr >= m_pixel_data.size())
+            return off_image_val;
+
+//        val = val % 4;//Guaranteed color scale is 4  --- 0~3
+        uint8_t Rdata = m_pixel_data.at(Addr);
+
+        Rdata = Rdata & (~(0xC0 >> ((X % 4)*2)));//Clear first, then set value
+        return Rdata | ((0xff << 6) >> ((X % 4)*2)); // TODO
+//        m_pixel_data.at(Addr) = Rdata | ((val << 6) >> ((X % 4)*2));
+    }else if(Scale == 7){
+        uint32_t Addr = X / 2  + Y * WidthByte;
+
+        if(Addr >= m_pixel_data.size())
+            return off_image_val;
+
+        uint8_t Rdata = m_pixel_data.at(Addr);
+        return Rdata | ((0xff << 4) >> ((X % 2)*4)); // TODO
+//        Rdata = Rdata & (~(0xF0 >> ((X % 2)*4)));//Clear first, then set value
+//        m_pixel_data.at(Addr) = Rdata | ((val << 4) >> ((X % 2)*4));
+        // printf("Add =  %d ,data = %d\r\n",Addr,Rdata);
+    }
+
     return 0;
 }
 

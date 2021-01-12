@@ -68,6 +68,9 @@ public:
         ) const;
 
 
+    void mirror(const mirror_t m);
+
+    void rotate(const rotate_t r);
 
 private:
     uint16_t Width {0};

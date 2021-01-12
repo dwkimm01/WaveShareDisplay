@@ -106,6 +106,8 @@ add_executable(wseink_cpp
         cpp/impl/screen_manager.h
         cpp/impl/widget_bitmap.cpp
         cpp/impl/widget_bitmap.h
+        cpp/impl/widget_string.cpp
+        cpp/impl/widget_string.h
 
         cpp/interfaces/i_bitmap_display.h
         cpp/interfaces/i_screen.h
