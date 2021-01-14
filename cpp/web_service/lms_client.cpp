@@ -6,40 +6,20 @@
 #include <future>
 #include "lms_client.h"
 
-lms_client::lms_client()
-
+namespace waveshare_eink_cpp
 {
 
-
+lms_client::lms_client()
+{
     using namespace drogon;
     int count = 0;
     auto client = HttpClient::newHttpClient("http://192.168.31.210:9000");
 
-//    auto req = HttpRequest::newHttpRequest();
-//    req->setMethod(drogon::Post);
-//    req->setPath("/jsonrpc.js");
-//    req->setParameter("wd", "wx");
-//    req->setParameter("oq", "wx");
 
-//    {
-//        const std::string rawJson = R"({"id":1,"method":"slim.request","params":["piCorePlayer",["status","-",1,"tags:al"]]})";
-//        const auto rawJsonLength = static_cast<int>(rawJson.length());
-//
-//        JSONCPP_STRING err;
-//        Json::Value root;
-//
-//        Json::CharReaderBuilder builder;
-//        const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
-//        if (!reader->parse(rawJson.c_str(), rawJson.c_str() + rawJsonLength, &root,
-//                           &err)) {
-//            std::cout << "error" << std::endl;
-//        }
-//    }
-
-
-//    curl -i -X POST -H 'Content-Type: application/json' -d \
-//'{"id":1,"method":"slim.request","params":["piCorePlayer",["status","-",1,"tags:al"]]}' \
-//http://192.168.31.210:9000/jsonrpc.js
+// From working curl script - that started here: https://forums.slimdevices.com/showthread.php?43880-any-javascript-json-squeezecenter-examples
+//  curl -i -X POST -H 'Content-Type: application/json' -d \
+//    '{"id":1,"method":"slim.request","params":["piCorePlayer",["status","-",1,"tags:al"]]}' \
+//    http://192.168.31.210:9000/jsonrpc.js
 
     Json::Value tags;
     tags.append("status");
@@ -47,13 +27,12 @@ lms_client::lms_client()
     tags.append(1);
     tags.append("tags:al");
 
-    Json::Value pp;
-    pp.append("piCorePlayer");
-    pp.append(tags);
+    Json::Value tags_array;
+    tags_array.append("piCorePlayer");
+    tags_array.append(tags);
 
-    Json::Value params; //("piCorePlayer");
-//    params["piCorePlayer"] = tags;
-    params = pp;
+    Json::Value params;
+    params = tags_array;
 
     Json::Value data;
     data["id"] = 1;
@@ -93,10 +72,46 @@ lms_client::lms_client()
                 });
     }
 
-    app().run();
+
+//    std::this_thread::sleep_for(std::chrono::seconds(4));
+//    app().run();
+    // TODO, need to be able to exit out of this without shutting down entire drogon server
+
+
 }
+
+
+void lms_client::play()
+{
+
+}
+
+std::string currently_playing()
+{
+    std::string res;
+
+
+    return res;
+}
+
+}
+
+#if 0
+Notes
+
+//    {
+//        const std::string rawJson = R"({"id":1,"method":"slim.request","params":["piCorePlayer",["status","-",1,"tags:al"]]})";
+//        const auto rawJsonLength = static_cast<int>(rawJson.length());
 //
-////app().run();
+//        JSONCPP_STRING err;
+//        Json::Value root;
 //
-//
-//}
+//        Json::CharReaderBuilder builder;
+//        const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
+//        if (!reader->parse(rawJson.c_str(), rawJson.c_str() + rawJsonLength, &root,
+//                           &err)) {
+//            std::cout << "error" << std::endl;
+//        }
+//    }
+
+#endif

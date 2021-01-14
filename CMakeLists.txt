@@ -117,10 +117,12 @@ add_executable(wseink_cpp
         cpp/main.cpp
         cpp/matrix.h
 
-        cpp/lms_client.cpp
-        cpp/lms_client.h
-        cpp/waveshare_web_service.cpp
-        cpp/waveshare_web_service.h
+        cpp/web_service/lms_client.cpp
+        cpp/web_service/lms_client.h
+        cpp/web_service/waveshare_web_service.cpp
+        cpp/web_service/waveshare_web_service.h
+        cpp/web_service/web_service.cpp
+        cpp/web_service/web_service.h
     )
 
 target_include_directories(wseink_cpp PUBLIC

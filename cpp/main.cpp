@@ -13,8 +13,9 @@
 #include "bitmap_display_2in9_null.h"
 #include "drawing.h"
 #include "../c/lib/Fonts/fonts.h"
-#include "waveshare_web_service.h"
-#include "lms_client.h"
+#include "web_service/waveshare_web_service.h"
+#include "web_service/lms_client.h"
+#include "web_service/web_service.h"
 
 #include "impl/screen_manager.h"
 #include "impl/screens/screen_bender.h"
@@ -178,9 +179,14 @@ int main(int argc, char* argv[])
     screen_manager_ptr->add_screen("widgets", std::shared_ptr<i_screen>(screen_widgets_ptr));
 
 #ifdef ENABLE_DROGON
-    //waveshare_web_service s(screen_manager_ptr);
-
+    waveshare_web_service s(screen_manager_ptr);
     lms_client client;
+
+    web_service ws;
+    ws.run_in_background();
+
+    std::cout << "waiting for shutdown cmd" << std::endl;
+    ws.join();
 #else
     display_test();
 #endif

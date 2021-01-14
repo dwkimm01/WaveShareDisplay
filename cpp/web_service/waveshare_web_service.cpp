@@ -150,7 +150,7 @@ waveshare_web_service::waveshare_web_service
     // Log endpoints being services
 
     //Run HTTP framework,the method will block in the internal event loop
-    drogon::app().run();
+// Assumes this is called elsewhere:    drogon::app().run();
 
 #endif
 }
