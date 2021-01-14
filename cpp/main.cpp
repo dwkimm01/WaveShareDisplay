@@ -58,8 +58,8 @@ int main(int argc, char* argv[])
     screen_manager_ptr->add_screen("square", std::shared_ptr<i_screen>(new screen_square()));
     screen_manager_ptr->add_screen("x", std::shared_ptr<i_screen>(new screen_x()));
     screen_manager_ptr->add_screen("bender", std::shared_ptr<i_screen>(new screen_bender()));
-    screen_manager_ptr->add_screen("currently_playing", std::shared_ptr<i_screen>(new screen_currently_playing()));
 
+    /*
 //TODO - fix bender teeth - displayed wrong now
 //TODO - why isn't the play button showing under Judah's name?
     bitmaps bmp;
@@ -69,12 +69,16 @@ int main(int argc, char* argv[])
     auto screen_widgets_ptr = std::make_shared<screen_widgets>(widget_vec);
 
     screen_manager_ptr->add_screen("widgets", std::shared_ptr<i_screen>(screen_widgets_ptr));
+*/
 
 #ifdef ENABLE_DROGON
 
     // Add server endpoints
     waveshare_web_service s(screen_manager_ptr);
-    lms_client client;
+    std::shared_ptr<lms_client> lms_client;
+
+    screen_manager_ptr->add_screen("currently_playing", std::shared_ptr<i_screen>(new screen_currently_playing(lms_client)));
+
 
     // Run this first to get background threads running
     web_service ws;
@@ -83,8 +87,8 @@ int main(int argc, char* argv[])
 
 //    client.play();
 //    client.pause();
-    const string currently_playing_title = client.currently_playing();
-    cout << "Currently Playing Title: " << currently_playing_title << endl;
+//    const string currently_playing_title = lms_client->currently_playing();
+//    cout << "Currently Playing Title: " << currently_playing_title << endl;
 
 
     cout << "waiting for shutdown cmd" << endl;
