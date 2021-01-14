@@ -202,17 +202,17 @@ std::string lms_client::currently_playing()
 
                 auto json_result = (*json_reply)["result"];
                 auto json_playlist_cur_index = json_result["playlist_cur_index"];
-//                std::cout << "json_playlist_cur_index = " << json_playlist_cur_index << std::endl;
+                std::cout << "json_playlist_cur_index = " << json_playlist_cur_index << std::endl;
 
                 // Don't know why asInt doesn't convert "0"
                 const std::string string_cur_index = json_playlist_cur_index.asString();
                 const int int_cur_index = std::stoi(string_cur_index);
-//                std::cout << "cur_index stripped (" << int_cur_index <<")"<< std::endl;
+                std::cout << "cur_index stripped (" << int_cur_index <<")"<< std::endl;
 
                 auto json_playlist_loop = json_result["playlist_loop"];
-//                std::cout << "json_playlist_loop = " << json_playlist_loop << std::endl;
+                std::cout << "json_playlist_loop = " << json_playlist_loop << std::endl;
                 auto json_current_song = json_playlist_loop[int_cur_index];
-//                std::cout << "json_current_song(" << json_current_song << std::endl;
+                std::cout << "json_current_song(" << json_current_song << std::endl;
 
                 auto json_current_title = json_current_song["title"];
                 std::cout << "json_current_title(" << json_current_title << ")" << std::endl;

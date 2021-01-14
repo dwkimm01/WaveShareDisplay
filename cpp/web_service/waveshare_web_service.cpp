@@ -131,6 +131,29 @@ waveshare_web_service::waveshare_web_service
               },
               {Get,"LoginFilter"});
 
+
+    app().registerHandler("/api/draw_current_screen",
+              [&](const HttpRequestPtr& req,
+                  std::function<void (const HttpResponsePtr &)> &&callback
+                  )
+              {
+
+                  bool draw_current_screen_result {false};
+
+                  if(m_screen_manager_ptr)
+                  {
+                      draw_current_screen_result = m_screen_manager_ptr->draw_current_screen();
+                      m_screen_manager_ptr->send_to_display();
+                  }
+
+                  Json::Value json;
+                  json["result"]="ok";
+                  json["draw_current_screen_result"] = draw_current_screen_result;
+                  auto resp=HttpResponse::newHttpJsonResponse(json);
+                  callback(resp);
+              },
+              {Get,"LoginFilter"});
+
     app().registerHandler("/api/shutdown",
           [&](const HttpRequestPtr& req,
               std::function<void (const HttpResponsePtr &)> &&callback)
