@@ -55,7 +55,7 @@ screen_currently_playing::~screen_currently_playing()
 void screen_currently_playing::draw(bitmap_image & img)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
-    std::cout << "screen currently playing drawning \"" << m_widget_currently_playing->text() << "\"" << std::endl;
+    std::cout << "screen currently playing drawing \"" << m_widget_currently_playing->text() << "\"" << std::endl;
     m_widget_currently_playing->draw(img);
 }
 

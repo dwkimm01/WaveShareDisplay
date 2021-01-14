@@ -19,8 +19,9 @@ screen_manager::screen_manager(std::shared_ptr<i_bitmap_display> bitmap_display_
             {
                 std::cout << "screen manager update starting" << std::endl;
                 std::unique_lock<std::mutex> lock(m_mutex);
+                std::cout << "screen manager update starting: got lock" << std::endl;
                 m_cv.wait_for(lock, std::chrono::seconds(30), [&](){ return !m_is_running; });
-
+                std::cout << "screen manager update starting: after wait_for" << std::endl;
                 this->draw_current_screen();
                 std::cout << "screen manager update starting, done" << std::endl;
             }
