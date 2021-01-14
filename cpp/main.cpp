@@ -182,6 +182,10 @@ int main(int argc, char* argv[])
     waveshare_web_service s(screen_manager_ptr);
     lms_client client;
 
+//    client.play();
+//    client.pause();
+    client.currently_playing();
+
     web_service ws;
     ws.run_in_background();
 

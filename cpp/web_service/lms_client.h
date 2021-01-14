@@ -14,6 +14,8 @@ public:
 
     void play();
 
+    void pause();
+
     std::string currently_playing();
 
 };
