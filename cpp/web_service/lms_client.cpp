@@ -1,9 +1,12 @@
 //
 // Created by Dave on 1/13/21.
 //
-#include <drogon/drogon.h>
+
 #include <iostream>
+#include <mutex>
+#include <condition_variable>
 #include <future>
+#include <drogon/drogon.h>
 #include "lms_client.h"
 
 namespace waveshare_eink_cpp
@@ -141,7 +144,9 @@ void lms_client::pause()
 
 std::string lms_client::currently_playing()
 {
-    std::string res;
+    std::string currently_playing_result_string;
+    std::mutex mutex;
+    std::condition_variable cv;
 
     using namespace drogon;
 
@@ -182,7 +187,7 @@ std::string lms_client::currently_playing()
 
     client->sendRequest(
             req,
-            [](ReqResult result, const HttpResponsePtr &response) {
+            [&currently_playing_result_string, &mutex, &cv](ReqResult result, const HttpResponsePtr &response) {
 
                 if(nullptr == response)
                 {
@@ -212,18 +217,25 @@ std::string lms_client::currently_playing()
                 auto json_current_title = json_current_song["title"];
                 std::cout << "json_current_title(" << json_current_title << ")" << std::endl;
 
-                auto cookies = response->cookies();
-                for (auto const &cookie : cookies)
                 {
-                    std::cout << cookie.first << "="
-                              << cookie.second.value()
-                              << ":domain=" << cookie.second.domain()
-                              << std::endl;
+                    std::lock_guard<std::mutex> lock(mutex);
+                    currently_playing_result_string = json_current_title.asString();
+                    cv.notify_all();
                 }
+
+//                auto cookies = response->cookies();
+//                for (auto const &cookie : cookies)
+//                {
+//                    std::cout << cookie.first << "="
+//                              << cookie.second.value()
+//                              << ":domain=" << cookie.second.domain()
+//                              << std::endl;
+//                }
             });
 
-
-    return res;
+    std::unique_lock<std::mutex> lock(mutex);
+    cv.wait(lock, [&](){ return !currently_playing_result_string.empty(); });
+    return currently_playing_result_string;
 }
 
 }

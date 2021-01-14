@@ -182,12 +182,14 @@ int main(int argc, char* argv[])
     waveshare_web_service s(screen_manager_ptr);
     lms_client client;
 
-//    client.play();
-//    client.pause();
-    client.currently_playing();
-
     web_service ws;
     ws.run_in_background();
+
+//    client.play();
+//    client.pause();
+    const std::string currently_playing_title = client.currently_playing();
+    std::cout << "Currently Playing Title: " << currently_playing_title << std::endl;
+
 
     std::cout << "waiting for shutdown cmd" << std::endl;
     ws.join();
