@@ -71,14 +71,14 @@ int main(int argc, char* argv[])
     screen_manager_ptr->add_screen("widgets", std::shared_ptr<i_screen>(screen_widgets_ptr));
 
 #ifdef ENABLE_DROGON
-    // Run this first to get background threads running
-    web_service ws;
-    ws.run_in_background();
 
     // Add server endpoints
     waveshare_web_service s(screen_manager_ptr);
     lms_client client;
 
+    // Run this first to get background threads running
+    web_service ws;
+    ws.run_in_background();
 
 
 //    client.play();
