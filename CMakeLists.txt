@@ -117,6 +117,8 @@ add_executable(wseink_cpp
         cpp/main.cpp
         cpp/matrix.h
 
+        cpp/lms_client.cpp
+        cpp/lms_client.h
         cpp/waveshare_web_service.cpp
         cpp/waveshare_web_service.h
     )

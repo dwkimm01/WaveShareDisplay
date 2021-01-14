@@ -14,6 +14,7 @@
 #include "drawing.h"
 #include "../c/lib/Fonts/fonts.h"
 #include "waveshare_web_service.h"
+#include "lms_client.h"
 
 #include "impl/screen_manager.h"
 #include "impl/screens/screen_bender.h"
@@ -166,7 +167,8 @@ int main(int argc, char* argv[])
     screen_manager_ptr->add_screen("square", std::shared_ptr<i_screen>(new screen_square()));
     screen_manager_ptr->add_screen("x", std::shared_ptr<i_screen>(new screen_x()));
     screen_manager_ptr->add_screen("bender", std::shared_ptr<i_screen>(new screen_bender()));
-
+//TODO - fix bender teeth - displayed wrong now
+//TODO - why isn't the play button showing under Judah's name?
     bitmaps bmp;
     auto widget_bmp_ptr = std::shared_ptr<widget_bitmap>(new widget_bitmap(bmp.get("play"), 0, 20));
     auto widget_string_ptr = std::shared_ptr<widget_string>(new widget_string("Judah", 0, 0));
@@ -176,10 +178,14 @@ int main(int argc, char* argv[])
     screen_manager_ptr->add_screen("widgets", std::shared_ptr<i_screen>(screen_widgets_ptr));
 
 #ifdef ENABLE_DROGON
-    waveshare_web_service s(screen_manager_ptr);
+    //waveshare_web_service s(screen_manager_ptr);
+
+    lms_client client;
 #else
     display_test();
 #endif
+
+
 
     cout << "Done." << endl;
     return 0;
