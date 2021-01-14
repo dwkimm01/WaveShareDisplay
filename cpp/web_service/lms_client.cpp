@@ -14,7 +14,7 @@ namespace waveshare_eink_cpp
 
 lms_client::lms_client()
 {
-    // This sassumes that drogon::app().run(); is called somewhere else
+    // This assumes that drogon::app().run(); is called somewhere else
 }
 
 

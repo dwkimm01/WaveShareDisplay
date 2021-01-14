@@ -11,9 +11,31 @@ screen_manager::screen_manager(std::shared_ptr<i_bitmap_display> bitmap_display_
     : m_bitmap_display_ptr(bitmap_display_ptr)
     , m_img(bitmap_display_ptr->create_image())
 {
+    m_thread = std::thread([&]()
+        {
+            while(m_is_running)
+            {
+                std::unique_lock<std::mutex> lock(m_mutex);
+                m_cv.wait_for(lock, std::chrono::seconds(30), [&](){ return !m_is_running; });
+
+                this->draw_current_screen();
+            }
+        });
 }
 
-screen_manager::~screen_manager() {}
+screen_manager::~screen_manager()
+{
+    {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        m_is_running = false;
+        m_cv.notify_all();
+    }
+
+    if(m_thread.joinable())
+    {
+        m_thread.join();
+    }
+}
 
 bool screen_manager::add_screen
     ( const std::string & screen_name

@@ -11,7 +11,12 @@ namespace waveshare_eink_cpp
 void web_service::run_in_background()
 {
     m_thread = std::thread([]()
-            { drogon::app().run(); });
+        { drogon::app().run(); });
+}
+
+bool web_service::is_running()
+{
+    return drogon::app().isRunning();
 }
 
 void web_service::quit()

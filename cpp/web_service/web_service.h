@@ -15,6 +15,8 @@ class web_service
 public:
     void run_in_background();
 
+    bool is_running();
+
     void quit();
 
     void join();

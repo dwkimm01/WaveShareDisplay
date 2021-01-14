@@ -90,8 +90,8 @@ int main(int argc, char* argv[])
 //    const string currently_playing_title = lms_client->currently_playing();
 //    cout << "Currently Playing Title: " << currently_playing_title << endl;
 
-
     cout << "waiting for shutdown cmd" << endl;
+
     ws.join();
 #endif
     cout << "Done, exiting." << endl;

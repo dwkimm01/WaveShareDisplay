@@ -37,7 +37,7 @@ waveshare_web_service::waveshare_web_service
 //          {Get,"LoginFilter"});
 
 
-    app().registerHandler("/api/list",
+    app().registerHandler("/api/screen_list",
           [&](const HttpRequestPtr& req,
              std::function<void (const HttpResponsePtr &)> &&callback)
           {
@@ -132,7 +132,7 @@ waveshare_web_service::waveshare_web_service
               {Get,"LoginFilter"});
 
 
-    app().registerHandler("/api/draw_current_screen",
+    app().registerHandler("/api/screen_draw_current",
               [&](const HttpRequestPtr& req,
                   std::function<void (const HttpResponsePtr &)> &&callback
                   )
@@ -154,7 +154,7 @@ waveshare_web_service::waveshare_web_service
               },
               {Get,"LoginFilter"});
 
-    app().registerHandler("/api/shutdown",
+    app().registerHandler("/api/shutdown_service",
           [&](const HttpRequestPtr& req,
               std::function<void (const HttpResponsePtr &)> &&callback)
           {
