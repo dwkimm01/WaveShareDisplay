@@ -5,6 +5,7 @@
 #ifndef WSEINK_CPP_SCREEN_CURRENTLY_PLAYING_H
 #define WSEINK_CPP_SCREEN_CURRENTLY_PLAYING_H
 
+#include <memory>
 #include "interfaces/i_screen.h"
 #include "impl/widget_string.h"
 
