@@ -89,6 +89,7 @@ int main(int argc, char* argv[])
 
     cout << "waiting for shutdown cmd" << endl;
     ws.join();
+#endif
     cout << "Done, exiting." << endl;
     return 0;
 }

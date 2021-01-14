@@ -6,6 +6,7 @@
 #define WSEINK_CPP_SCREEN_CURRENTLY_PLAYING_H
 
 #include "interfaces/i_screen.h"
+#include "impl/widget_string.h"
 
 namespace waveshare_eink_cpp
 {
@@ -18,6 +19,9 @@ public:
     virtual ~screen_currently_playing();
 
     void draw(bitmap_image & img) override;
+
+private:
+    std::unique_ptr<widget_string> m_widget_currently_playing;
 };
 
 }
