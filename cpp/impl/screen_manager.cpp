@@ -2,6 +2,7 @@
 // Created by Dave on 1/9/21.
 //
 
+#include <iostream>
 #include "screen_manager.h"
 
 namespace waveshare_eink_cpp
@@ -16,10 +17,12 @@ screen_manager::screen_manager(std::shared_ptr<i_bitmap_display> bitmap_display_
             m_is_running = true;
             while(m_is_running)
             {
+                std::cout << "screen manager update starting" << std::endl;
                 std::unique_lock<std::mutex> lock(m_mutex);
                 m_cv.wait_for(lock, std::chrono::seconds(30), [&](){ return !m_is_running; });
 
                 this->draw_current_screen();
+                std::cout << "screen manager update starting, done" << std::endl;
             }
         });
 }
