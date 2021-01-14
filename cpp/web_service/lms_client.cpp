@@ -233,6 +233,7 @@ std::string lms_client::currently_playing()
 //                }
             });
 
+    // TODO, add timeout!
     std::unique_lock<std::mutex> lock(mutex);
     cv.wait(lock, [&](){ return !currently_playing_result_string.empty(); });
     return currently_playing_result_string;
