@@ -13,6 +13,7 @@ screen_manager::screen_manager(std::shared_ptr<i_bitmap_display> bitmap_display_
 {
     m_thread = std::thread([&]()
         {
+            m_is_running = true;
             while(m_is_running)
             {
                 std::unique_lock<std::mutex> lock(m_mutex);
