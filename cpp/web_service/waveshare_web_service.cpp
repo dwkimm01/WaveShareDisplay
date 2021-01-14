@@ -180,4 +180,9 @@ waveshare_web_service::waveshare_web_service
 
 waveshare_web_service::~waveshare_web_service() {}
 
+/**
+ * Notes:
+ * - https://gist.github.com/samtherussell/335bf9ba75363bd167d2470b8689d9f2
+ */
+
 }

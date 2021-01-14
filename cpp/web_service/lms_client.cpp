@@ -33,9 +33,6 @@ void lms_client::play()
 
     Json::Value tags;
     tags.append("play");
-//    tags.append("-");
-//    tags.append(1);
-//    tags.append("tags:al");
 
     Json::Value tags_array;
     tags_array.append("piCorePlayer");
@@ -129,14 +126,6 @@ void lms_client::pause()
                 // auto headers=response.
 
                 std::cout << "{{{" << response->getBody() << "}}}" << std::endl;
-                auto cookies = response->cookies();
-                for (auto const &cookie : cookies)
-                {
-                    std::cout << cookie.first << "="
-                              << cookie.second.value()
-                              << ":domain=" << cookie.second.domain()
-                              << std::endl;
-                }
             });
 }
 
@@ -189,48 +178,54 @@ std::string lms_client::currently_playing()
             req,
             [&currently_playing_result_string, &mutex, &cv](ReqResult result, const HttpResponsePtr &response) {
 
-                if(nullptr == response)
+                std::string current_title = "Unknown";
+
+                try
                 {
-                    std::cerr << "Response is somehow null\n";
-                    return;
+                    if(nullptr == response)
+                    {
+                        std::cerr << "Response is somehow null\n";
+                        return;
+                    }
+
+
+
+                    std::cout << "rep<<<" << response->getBody() << ">>>" << std::endl;
+
+                    auto json_reply = response->getJsonObject();
+                    auto json_result = (*json_reply)["result"];
+                    auto json_playlist_cur_index = json_result["playlist_cur_index"];
+                    std::cout << "json_playlist_cur_index (" << json_playlist_cur_index << ")" << std::endl;
+
+                    // Don't know why asInt doesn't convert "0"
+                    const std::string string_cur_index = json_playlist_cur_index.asString();
+//                    const int int_cur_index = std::stoi(string_cur_index);
+//                    std::cout << "cur_index stripped (" << int_cur_index << ")" << std::endl;
+
+                    auto json_playlist_loop = json_result["playlist_loop"];
+                    std::cout << "json_playlist_loop = " << json_playlist_loop << std::endl;
+                    auto json_current_song = json_playlist_loop[0]; // just use first always apparently int_cur_index];
+                    std::cout << "json_current_song(" << json_current_song << ")" << std::endl;
+
+                    auto json_current_title = json_current_song["title"];
+                    std::cout << "json_current_title(" << json_current_title << ")" << std::endl;
+
+                    current_title = json_current_title.asString();
+                }
+                catch(const std::exception &e)
+                {
+                    std::cerr << "Exception getting current title: " << e.what() << std::endl;
+                    current_title = "Exc: " + std::string((nullptr != e.what())?(e.what()):("null"));
                 }
 
-                std::cout << "rep<<<" << response->getBody() << ">>>" << std::endl;
-
-
-                auto json_reply = response->getJsonObject();
-
-                auto json_result = (*json_reply)["result"];
-                auto json_playlist_cur_index = json_result["playlist_cur_index"];
-                std::cout << "json_playlist_cur_index = " << json_playlist_cur_index << std::endl;
-
-                // Don't know why asInt doesn't convert "0"
-                const std::string string_cur_index = json_playlist_cur_index.asString();
-                const int int_cur_index = std::stoi(string_cur_index);
-                std::cout << "cur_index stripped (" << int_cur_index <<")"<< std::endl;
-
-                auto json_playlist_loop = json_result["playlist_loop"];
-                std::cout << "json_playlist_loop = " << json_playlist_loop << std::endl;
-                auto json_current_song = json_playlist_loop[int_cur_index];
-                std::cout << "json_current_song(" << json_current_song << std::endl;
-
-                auto json_current_title = json_current_song["title"];
-                std::cout << "json_current_title(" << json_current_title << ")" << std::endl;
-
+                // Update return value
                 {
                     std::lock_guard<std::mutex> lock(mutex);
-                    currently_playing_result_string = json_current_title.asString();
+                    currently_playing_result_string = current_title;
                     cv.notify_all();
                 }
 
-//                auto cookies = response->cookies();
-//                for (auto const &cookie : cookies)
-//                {
-//                    std::cout << cookie.first << "="
-//                              << cookie.second.value()
-//                              << ":domain=" << cookie.second.domain()
-//                              << std::endl;
-//                }
+                // TODO - need a way to force an update - would be nice to do a partial update
             });
 
     // TODO, add timeout!
