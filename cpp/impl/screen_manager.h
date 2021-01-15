@@ -61,11 +61,6 @@ private:
     std::mutex m_mutex;
     std::map<std::string, std::shared_ptr<i_screen>> m_screen_map;
     std::shared_ptr<i_screen> m_current_screen;
-
-//    // Updating thread
-//    bool m_is_running {false};
-//    std::condition_variable m_cv;
-//    std::thread m_thread;
 };
 }
 
