@@ -85,6 +85,7 @@ int main(int argc, char* argv[])
         ( std::chrono::milliseconds(4000)
         , [screen_manager_ptr]()
             {
+                screen_manager_ptr->clear_current_screen(255);
                 screen_manager_ptr->draw_current_screen();
                 screen_manager_ptr->send_to_display();
             }
