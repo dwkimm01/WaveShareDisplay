@@ -76,6 +76,7 @@ SET_SOURCE_FILES_PROPERTIES(${CFILES} PROPERTIES LANGUAGE CXX )
 add_executable(wseink_cpp
     ${EINK_SRCS}
 
+        cpp/active_timer.h
         cpp/bitmap_display_2in9.cpp
         cpp/bitmap_display_2in9.h
 

@@ -30,6 +30,8 @@
 #include "impl/widget_bitmap.h"
 #include "impl/widget_string.h"
 
+#include "active_timer.h"
+
 int main(int argc, char* argv[])
 {
     using namespace std;
@@ -79,6 +81,10 @@ int main(int argc, char* argv[])
 
     screen_manager_ptr->add_screen("currently_playing", std::shared_ptr<i_screen>(new screen_currently_playing(lms_client)));
 
+    active_timer timer
+        ( std::chrono::milliseconds(4000)
+        , [screen_manager_ptr](){ screen_manager_ptr->draw_current_screen(); }
+        );
 
     // Run this first to get background threads running
     web_service ws;
