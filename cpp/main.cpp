@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
     screen_manager_ptr->add_screen("currently_playing", std::shared_ptr<i_screen>(new screen_currently_playing(lms_client)));
 
     active_timer timer
-        ( std::chrono::milliseconds(4000)
+        ( std::chrono::milliseconds(10000)
         , [screen_manager_ptr]()
             {
                 screen_manager_ptr->clear_current_screen(255);
