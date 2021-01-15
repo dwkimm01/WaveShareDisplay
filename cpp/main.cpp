@@ -83,7 +83,11 @@ int main(int argc, char* argv[])
 
     active_timer timer
         ( std::chrono::milliseconds(4000)
-        , [screen_manager_ptr](){ screen_manager_ptr->draw_current_screen(); }
+        , [screen_manager_ptr]()
+            {
+                screen_manager_ptr->draw_current_screen();
+                screen_manager_ptr->send_to_display();
+            }
         );
 
     // Run this first to get background threads running
