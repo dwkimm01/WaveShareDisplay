@@ -83,12 +83,12 @@ public:
 
     // Time
     struct paint_time_t {
-        size_t Year;  //0000
-        uint8_t Month; //1 - 12
-        uint8_t  Day;   //1 - 30
-        uint8_t  Hour;  //0 - 23
-        uint8_t  Min;   //0 - 59
-        uint8_t  Sec;   //0 - 59
+        size_t Year {0};  //0000
+        uint8_t Month {0}; //1 - 12
+        uint8_t  Day {0};   //1 - 30
+        uint8_t  Hour {0};  //0 - 23
+        uint8_t  Min {0};   //0 - 59
+        uint8_t  Sec {0};   //0 - 59
     };
 
     static void Paint_DrawTime

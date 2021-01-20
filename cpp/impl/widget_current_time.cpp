@@ -40,6 +40,7 @@ void widget_current_time::draw(bitmap_image & img)
     drawing::paint_time_t paint_time;
     paint_time.Hour = local_tm.tm_hour;
     paint_time.Min = local_tm.tm_min;
+    paint_time.Sec = 0;
     drawing::Paint_DrawTime
             ( img
             , m_x
