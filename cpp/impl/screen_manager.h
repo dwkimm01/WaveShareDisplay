@@ -61,7 +61,7 @@ private:
 
     std::mutex m_mutex;
     std::map<std::string, std::shared_ptr<i_screen>> m_screen_map;
-    std::shared_ptr<i_screen> m_current_screen;
+    std::shared_ptr<i_screen> m_current_screen {nullptr};
 };
 }
 
