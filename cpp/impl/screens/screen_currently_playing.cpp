@@ -24,7 +24,26 @@ screen_currently_playing::screen_currently_playing
                 try
                 {
                     // Get updated currently playing
-                    const std::string currently_playing = m_lms_client->currently_playing();
+                    const std::string currently_playing_full_str = m_lms_client->currently_playing();
+                    // Limit string to a certain length
+                    std::string currently_playing;
+
+                    const size_t max_chars_total {20};
+                    currently_playing.reserve(max_chars_total);
+                    for(int i = 0; i < max_chars_total; ++i)
+                    {
+                        currently_playing.push_back(currently_playing_full_str.at(i));
+                    }
+
+                    // If length exceeded overwrite end with ...
+                    if(currently_playing_full_str.size() > max_chars_total)
+                    {
+                        for(int i = (max_chars_total - 1) - 3; i < max_chars_total; ++i)
+                        {
+                            currently_playing.at(i) = '.';
+                        }
+                    }
+
 
                     {
                         // Update
