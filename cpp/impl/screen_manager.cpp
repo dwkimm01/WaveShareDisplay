@@ -61,9 +61,10 @@ bool screen_manager::draw_current_screen
     {
         std::lock_guard<std::mutex> lock(m_mutex);
         if (!m_current_screen)
+        {
+            std::cout << "No current screen to daw" << std::endl;
             return false;
-        if (!m_bitmap_display_ptr)
-            return false;
+        }
 
         // Draw to m_img_b first
         m_current_screen->draw(m_img_b);
@@ -79,11 +80,16 @@ bool screen_manager::send_to_display
 {
     std::lock_guard<std::mutex> lock(m_mutex);
     if(!m_bitmap_display_ptr)
+    {
+        std::cout << "No bitmap display to send img to" << std::endl;
         return false;
+    }
 
     if(m_img_b.has_updates(m_img_a))
     {
+        std::cout << "Copying updated screen" << std::endl;
         m_img_a = m_img_b;
+        std::cout << "Copying updated screen, done" << std::endl;
         m_bitmap_display_ptr->display(m_img_a);
     }
 

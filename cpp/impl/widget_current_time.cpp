@@ -1,7 +1,7 @@
 //
 // Created by Dave on 1/19/21.
 //
-
+#include <iostream>
 #include <chrono>
 #include "drawing.h"
 #include "widget_current_time.h"
@@ -28,10 +28,14 @@ void widget_current_time::update() {}
 
 void widget_current_time::draw(bitmap_image & img)
 {
+    std::cout << "drawing current time" << std::endl;
     // Draw time
     const time_t tt = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 //        tm utc_tm = *gmtime(&tt);
+    std::cout << "converting current time to local time" << std::endl;
     tm local_tm = *localtime(&tt);
+
+
 
     drawing::paint_time_t paint_time;
     paint_time.Hour = local_tm.tm_hour;
