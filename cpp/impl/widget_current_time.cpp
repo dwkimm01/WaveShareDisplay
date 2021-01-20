@@ -41,10 +41,11 @@ void widget_current_time::draw(bitmap_image & img)
         ss << '0';
     ss << local_tm.tm_hour;
     ss << ':';
-    if(local_tm.tm_min < 10)
+    const int min_rounded = (local_tm.tm_min / 10) * 10;
+    if(min_rounded < 10)
         ss << '0';
-    ss << local_tm.tm_min;
-TODO round minute to the nearest 10 or something so as not to update screen too often
+    ss << min_rounded;
+
     std::string current_time_str = ss.str();
 
     drawing::Paint_DrawString_EN
