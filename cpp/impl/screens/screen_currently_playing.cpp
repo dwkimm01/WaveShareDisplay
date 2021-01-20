@@ -75,8 +75,8 @@ void screen_currently_playing::draw(bitmap_image & img)
         // Draw time block
         
         const std::vector<int> x_vals_vec 
-            { 50, 50, 50, 50, 50, 50, 50, 50, 50, 50
-            , 50, 50, 50, 50, 49, 48, 47, 46, 45, 44
+            { 45, 45, 45, 45, 45, 45, 45, 45, 45, 45
+            , 45, 45, 45, 45, 45, 44, 43, 42, 41, 40
             };
         
         const int time_block_height {20};
