@@ -12,7 +12,7 @@ namespace waveshare_eink_cpp
 screen_currently_playing::screen_currently_playing
     ( std::shared_ptr<lms_client> lms_client
     ) : m_lms_client(lms_client)
-      , m_widget_currently_playing(new widget_string("Unknown", 10, 20, 0, 255))
+      , m_widget_currently_playing(new widget_string("Unknown", 10, 20, 255, 0))
       , m_widget_current_time(new widget_current_time(0, 0, 0, 255))
 {
     m_running = true;
