@@ -64,11 +64,23 @@ void screen_currently_playing::draw(bitmap_image & img)
 
     {
         // Draw time block
+        
+        const std::vector<int> x_vals_vec 
+            { 80, 79, 78, 77, 76, 75, 74, 73, 72, 71
+            , 70, 70, 70, 70, 70, 70, 70, 70, 70, 70
+            , 70, 70, 70, 70, 70, 70, 70, 70, 70, 70
+            , 70, 70, 70, 70, 70, 70, 70, 70, 70, 70
+            };
+        
         const int time_block_height {40};
-        const int time_block_width {80};
+        // const int time_block_width {70};
 
         for(int i = 0; i < time_block_height; ++i)
         {
+            int time_block_width = 70;
+            if(x_vals_vec.size() > i)
+                time_block_width = x_vals_vec[i];
+
             drawing::Paint_DrawLine
                 ( img
                 , img.image_width_pixels() - time_block_width, img.image_height_pixels() - i
