@@ -46,7 +46,7 @@ void widget_current_time::draw(bitmap_image & img)
         ss << '0';
     ss << min_rounded;
 
-    std::string current_time_str = ss.str();
+    const std::string current_time_str = ss.str();
 
     drawing::Paint_DrawString_EN
         ( img

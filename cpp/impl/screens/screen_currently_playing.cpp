@@ -64,20 +64,20 @@ void screen_currently_playing::draw(bitmap_image & img)
 
     {
         // Draw time block
-//        const int time_block_height {40};
-//        const int time_block_width {80};
-//
-//        for(int i = 0; i < time_block_height; ++i)
-//        {
-//            drawing::Paint_DrawLine
-//                ( img
-//                , img.image_width_pixels() - time_block_width, img.image_height_pixels() - i
-//                , img.image_width_pixels() - 0, img.image_height_pixels() - i
-//                , drawing::d_BLACK
-//                , drawing::d_DOT_PIXEL_DFT
-//                , drawing::d_LINE_STYLE_SOLID
-//                );
-//        }
+        const int time_block_height {40};
+        const int time_block_width {80};
+
+        for(int i = 0; i < time_block_height; ++i)
+        {
+            drawing::Paint_DrawLine
+                ( img
+                , img.image_width_pixels() - time_block_width, img.image_height_pixels() - i
+                , img.image_width_pixels() - 0, img.image_height_pixels() - i
+                , drawing::d_BLACK
+                , drawing::d_DOT_PIXEL_DFT
+                , drawing::d_LINE_STYLE_SOLID
+                );
+        }
 
         // Move clock to correct position
         m_widget_current_time->x() = img.image_width_pixels() - 50;
