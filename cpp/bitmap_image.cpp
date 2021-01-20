@@ -257,14 +257,19 @@ bitmap_image::rotate_t bitmap_image::rotate() const { return Rotate; }
 bool bitmap_image::has_updates(const bitmap_image & rhs) const
 {
     if(m_pixel_data.size() != rhs.m_pixel_data.size())
+    {
+        std::cout << "Pixel data size is differenent, what?" << std::endl;
         return true;
+    }
     for(int i = 0; i < m_pixel_data.size(); ++i)
     {
         if(m_pixel_data.at(i) != rhs.m_pixel_data.at(i))
         {
+            std::cout << "pixel diff at " << i << std::endl;
             return true;
         }
     }
+    std::cout << "No pixel diffs" << std::endl;
     return false;
 }
 
