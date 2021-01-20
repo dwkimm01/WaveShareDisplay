@@ -25,25 +25,15 @@ screen_currently_playing::screen_currently_playing
                 {
                     // Get updated currently playing
                     const std::string currently_playing_full_str = m_lms_client->currently_playing();
-                    // Limit string to a certain length
-                    std::string currently_playing;
 
-                    const size_t max_chars_total {20};
-                    currently_playing.reserve(max_chars_total);
-                    for(int i = 0; i < max_chars_total; ++i)
+                    std::string currently_playing = currently_playing_full_str;
+                    if(currently_playing.size() >= 20)
                     {
-                        currently_playing.push_back(currently_playing_full_str.at(i));
+                        currently_playing.resize(20);
+                        currently_playing.at(19) = '.';
+                        currently_playing.at(18) = '.';
+                        currently_playing.at(17) = '.';
                     }
-
-                    // If length exceeded overwrite end with ...
-                    if(currently_playing_full_str.size() > max_chars_total)
-                    {
-                        for(int i = (max_chars_total - 1) - 3; i < max_chars_total; ++i)
-                        {
-                            currently_playing.at(i) = '.';
-                        }
-                    }
-
 
                     {
                         // Update
@@ -85,8 +75,8 @@ void screen_currently_playing::draw(bitmap_image & img)
         // Draw time block
         
         const std::vector<int> x_vals_vec 
-            { 101, 100, 50, 50, 50, 50, 50, 50, 50, 50
-            , 49, 48, 47, 46, 45, 44, 43, 42, 41, 40
+            { 50, 50, 50, 50, 50, 50, 50, 50, 50, 50
+            , 50, 50, 50, 50, 49, 48, 47, 46, 45, 44
             };
         
         const int time_block_height {20};
