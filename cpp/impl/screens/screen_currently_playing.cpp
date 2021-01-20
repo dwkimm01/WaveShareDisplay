@@ -85,13 +85,11 @@ void screen_currently_playing::draw(bitmap_image & img)
         // Draw time block
         
         const std::vector<int> x_vals_vec 
-            { 70, 70, 70, 70, 70, 70, 70, 70, 70, 70
-            , 70, 70, 70, 70, 70, 70, 70, 70, 70, 70
-            , 70, 70, 70, 70, 70, 70, 70, 70, 70, 70
-            , 69, 68, 67, 66, 65, 64, 63, 62, 61, 60
+            { 101, 100, 50, 50, 50, 50, 50, 50, 50, 50
+            , 49, 48, 47, 46, 45, 44, 43, 42, 41, 40
             };
         
-        const int time_block_height {40};
+        const int time_block_height {20};
         // const int time_block_width {70};
 
         for(int i = 0; i < time_block_height; ++i)
@@ -111,8 +109,8 @@ void screen_currently_playing::draw(bitmap_image & img)
         }
 
         // Move clock to correct position
-        m_widget_current_time->x() = img.image_width_pixels() - 50;
-        m_widget_current_time->y() = img.image_height_pixels() - 20;
+        m_widget_current_time->x() = img.image_width_pixels() - 40;
+        m_widget_current_time->y() = img.image_height_pixels() - 15;
         m_widget_current_time->draw(img);
     }
 
