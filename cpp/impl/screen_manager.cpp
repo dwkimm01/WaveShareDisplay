@@ -10,7 +10,8 @@ namespace waveshare_eink_cpp
 
 screen_manager::screen_manager(std::shared_ptr<i_bitmap_display> bitmap_display_ptr)
     : m_bitmap_display_ptr(bitmap_display_ptr)
-    , m_img(bitmap_display_ptr->create_image())
+    , m_img_a(bitmap_display_ptr->create_image())
+    , m_img_b(bitmap_display_ptr->create_image())
 {}
 
 screen_manager::~screen_manager()
@@ -64,8 +65,8 @@ bool screen_manager::draw_current_screen
         if (!m_bitmap_display_ptr)
             return false;
 
-        // Clear first?
-        m_current_screen->draw(m_img);
+        // Draw to m_img_b first
+        m_current_screen->draw(m_img_b);
     }
 
     std::cout << "screen manager draw current screen, done" << std::endl;
@@ -79,7 +80,13 @@ bool screen_manager::send_to_display
     std::lock_guard<std::mutex> lock(m_mutex);
     if(!m_bitmap_display_ptr)
         return false;
-    m_bitmap_display_ptr->display(m_img);
+
+    if(m_img_b.has_updates(m_img_a))
+    {
+        m_img_a = m_img_b;
+        m_bitmap_display_ptr->display(m_img_a);
+    }
+
     return true;
 }
 
@@ -91,7 +98,8 @@ bool screen_manager::clear_current_screen
     if(!m_bitmap_display_ptr)
         return false;
 
-    m_img.fill(val);
+    m_img_a.fill(val);
+    m_img_b.fill(val);
     return true;
 }
 

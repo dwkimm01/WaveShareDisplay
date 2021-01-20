@@ -4,6 +4,9 @@ WaveShare 2.9" display for Judah's music box
 Started from [Waveshare](https://github.com/waveshare/e-Paper)
 
 TODO
+* Clear window to all white initially
+* Set currently playing as default screen at startup
+* Only send update to display if there are changes
 * Make widget class and move over screen_XXX which are just examples
 * Make LMS default play only locally
 DONE * Fix string widget XY not taking into account all mirror and all rotate properly
@@ -20,8 +23,10 @@ DONE  * build and install drogon with [deps](https://medium.com/@contact_80086/i
 * Cube rotated and perspective [1](https://github.com/muralivnv/small-cpp-matrix-library/blob/master/matrix.h) [2](https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/building-basic-perspective-projection-matrix) [3](http://math.hws.edu/graphicsbook/source/glut/cubes-with-vertex-arrays.c)
 * Dragon Curve fractal
 DONE * Build web app (with drogon)
-  * Get LMS currently playing
-  * Get LMS volume
+DONE  * Get LMS currently playing
+  * Set LMS volume - to remove sbpd need
+  * Get LMS volume - to remove sbpd need
+  * Read rotary encoder and button - to remove sbpd need
   * Add picture to display
   * Display robot teeth
   * Add monkey [SVG](https://github.com/sammycage/lunasvg)

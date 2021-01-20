@@ -74,6 +74,7 @@ public:
     rotate_t& rotate();
     rotate_t rotate() const;
 
+    bool has_updates(const bitmap_image & rhs) const;
 
 private:
     uint16_t Width {0};

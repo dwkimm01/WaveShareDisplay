@@ -254,5 +254,19 @@ bitmap_image::rotate_t& bitmap_image::rotate() { return Rotate; }
 bitmap_image::rotate_t bitmap_image::rotate() const { return Rotate; }
 
 
+bool bitmap_image::has_updates(const bitmap_image & rhs) const
+{
+    if(m_pixel_data.size() != rhs.m_pixel_data.size())
+        return true;
+    for(int i = 0; i < m_pixel_data.size(); ++i)
+    {
+        if(m_pixel_data.at(i) != rhs.m_pixel_data.at(i))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 }

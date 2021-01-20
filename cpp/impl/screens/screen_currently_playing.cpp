@@ -37,7 +37,7 @@ screen_currently_playing::screen_currently_playing
                     std::cout << "Exception updating currently playing: " << e.what() << std::endl;
                 }
 
-                std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+                std::this_thread::sleep_for(std::chrono::milliseconds(10000));
             }
 
         });

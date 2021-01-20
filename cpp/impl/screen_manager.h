@@ -56,7 +56,8 @@ public:
 
 private:
     std::shared_ptr<i_bitmap_display> m_bitmap_display_ptr;
-    bitmap_image m_img;
+    bitmap_image m_img_a;
+    bitmap_image m_img_b;
 
     std::mutex m_mutex;
     std::map<std::string, std::shared_ptr<i_screen>> m_screen_map;
