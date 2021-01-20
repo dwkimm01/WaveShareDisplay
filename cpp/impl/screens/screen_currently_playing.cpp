@@ -77,9 +77,9 @@ void screen_currently_playing::draw(bitmap_image & img)
 //        }
 
         // Move clock to correct position
-        m_widget_current_time->x() = img.image_width_pixels() - 50;
-        m_widget_current_time->y() = img.image_height_pixels() - 20;
-        m_widget_current_time->draw(img);
+//        m_widget_current_time->x() = img.image_width_pixels() - 50;
+//        m_widget_current_time->y() = img.image_height_pixels() - 20;
+//        m_widget_current_time->draw(img);
     }
 
 }
