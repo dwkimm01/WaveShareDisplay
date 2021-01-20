@@ -13,9 +13,13 @@ widget_string::widget_string
     ( const std::string & text
     , const size_t x
     , const size_t y
-    ) : m_x(x)
+    , const uint8_t color_foreground
+    , const uint8_t color_background
+    ) : m_text(text)
+      , m_x(x)
       , m_y(y)
-      , m_text(text)
+      , m_color_foreground(color_foreground)
+      , m_color_background(color_background)
 {}
 
 widget_string::~widget_string() {}
@@ -25,13 +29,13 @@ void widget_string::update() {}
 void widget_string::draw(bitmap_image & img)
 {
     drawing::Paint_DrawString_EN
-        (img
+        ( img
         , m_x
         , m_y
         , m_text.c_str()
         , &Font12
-        , drawing::d_WHITE
-        , drawing::d_BLACK
+        , (drawing::color_t) m_color_foreground // drawing::d_WHITE
+        , (drawing::color_t) m_color_background // drawing::d_BLACK
         );
 }
 

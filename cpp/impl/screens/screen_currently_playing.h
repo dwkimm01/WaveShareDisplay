@@ -10,6 +10,7 @@
 #include <mutex>
 #include "interfaces/i_screen.h"
 #include "impl/widget_string.h"
+#include "impl/widget_current_time.h"
 #include "web_service/lms_client.h"
 
 namespace waveshare_eink_cpp
@@ -29,6 +30,7 @@ public:
 private:
     std::shared_ptr<lms_client> m_lms_client;
     std::unique_ptr<widget_string> m_widget_currently_playing;
+    std::unique_ptr<widget_current_time> m_widget_current_time;
 
     std::mutex m_mutex;
     bool m_running {false};

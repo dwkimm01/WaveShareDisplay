@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "screen_currently_playing.h"
-
+#include "drawing.h"
 
 namespace waveshare_eink_cpp
 {
@@ -12,7 +12,8 @@ namespace waveshare_eink_cpp
 screen_currently_playing::screen_currently_playing
     ( std::shared_ptr<lms_client> lms_client
     ) : m_lms_client(lms_client)
-      , m_widget_currently_playing(new widget_string("Unknown", 10, 10))
+      , m_widget_currently_playing(new widget_string("Unknown", 10, 20, 0, 255))
+      , m_widget_current_time(new widget_current_time())
 {
     m_running = true;
     m_thread = std::thread([&]()
@@ -57,6 +58,28 @@ void screen_currently_playing::draw(bitmap_image & img)
     std::lock_guard<std::mutex> lock(m_mutex);
     std::cout << "screen currently playing drawing \"" << m_widget_currently_playing->text() << "\"" << std::endl;
     m_widget_currently_playing->draw(img);
+
+    {
+        // Draw time block
+        const int time_block_height {40};
+        const int time_block_width {80};
+
+        for(int i = 0; i < time_block_height; ++i)
+        {
+            drawing::Paint_DrawLine
+                ( img
+                , img.image_width_pixels() - time_block_width, img.image_height_pixels() - i
+                , img.image_width_pixels(), img.image_height_pixels() - i
+                , drawing::d_BLACK
+                , drawing::d_DOT_PIXEL_DFT
+                , drawing::d_LINE_STYLE_SOLID
+                );
+        }
+
+
+        m_widget_current_time->draw(img);
+    }
+
 }
 
 }

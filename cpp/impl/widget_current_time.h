@@ -1,9 +1,9 @@
 //
-// Created by Dave on 1/11/21.
+// Created by Dave on 1/19/21.
 //
 
-#ifndef WSEINK_CPP_WIDGET_STRING_H
-#define WSEINK_CPP_WIDGET_STRING_H
+#ifndef WSEINK_CPP_WIDGET_CURRENT_TIME_H
+#define WSEINK_CPP_WIDGET_CURRENT_TIME_H
 
 #include <string>
 #include "interfaces/i_widget.h"
@@ -11,18 +11,19 @@
 namespace waveshare_eink_cpp
 {
 
-class widget_string : public i_widget
+class widget_current_time : public i_widget
 {
 public:
-    widget_string();
-    widget_string
-        ( const std::string & text
-        , const size_t x
+    widget_current_time();
+
+    widget_current_time
+        ( const size_t x
         , const size_t y
         , const uint8_t color_foreground
         , const uint8_t color_background
         );
-    virtual ~widget_string();
+
+    virtual ~widget_current_time();
 
     void update() override;
 
@@ -40,11 +41,7 @@ public:
     uint8_t color_background() const override;
     uint8_t & color_background() override;
 
-    std::string & text();
-    const std::string & text() const;
-
 private:
-    std::string m_text;
 
     size_t m_x {0};
     size_t m_y {0};
@@ -52,6 +49,7 @@ private:
     uint8_t m_color_foreground {0};
     uint8_t m_color_background {0};
 };
+
 }
 
-#endif //WSEINK_CPP_WIDGET_STRING_H
+#endif //WSEINK_CPP_WIDGET_CURRENT_TIME_H
