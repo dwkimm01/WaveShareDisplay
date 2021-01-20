@@ -4,6 +4,7 @@ WaveShare 2.9" display for Judah's music box
 Started from [Waveshare](https://github.com/waveshare/e-Paper)
 
 TODO
+* Use boost::di fork to wire together pieces
 * Clear window to all white initially
 * Set currently playing as default screen at startup
 * Only send update to display if there are changes

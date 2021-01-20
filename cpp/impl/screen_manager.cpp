@@ -12,7 +12,10 @@ screen_manager::screen_manager(std::shared_ptr<i_bitmap_display> bitmap_display_
     : m_bitmap_display_ptr(bitmap_display_ptr)
     , m_img_a(bitmap_display_ptr->create_image())
     , m_img_b(bitmap_display_ptr->create_image())
-{}
+{
+    // When starting up give m_img_a something different to force an update
+    m_img_a.fill(50); // nothing uses 50, yeah bad sentinel value should be defined somewhere
+}
 
 screen_manager::~screen_manager()
 {}
@@ -62,7 +65,7 @@ bool screen_manager::draw_current_screen
         std::lock_guard<std::mutex> lock(m_mutex);
         if (!m_current_screen)
         {
-            std::cout << "No current screen to daw" << std::endl;
+            std::cout << "No current screen to draw" << std::endl;
             return false;
         }
 

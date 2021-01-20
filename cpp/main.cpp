@@ -80,6 +80,7 @@ int main(int argc, char* argv[])
     std::shared_ptr<lms_client> lms_client;
 
     screen_manager_ptr->add_screen("currently_playing", std::shared_ptr<i_screen>(new screen_currently_playing(lms_client)));
+    screen_manager_ptr->set_screen("currently_playing");
 
     active_timer timer
         ( std::chrono::milliseconds(10000)
@@ -94,7 +95,6 @@ int main(int argc, char* argv[])
     // Run this first to get background threads running
     web_service ws;
     ws.run_in_background();
-
 
 //    client.play();
 //    client.pause();
