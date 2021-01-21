@@ -109,7 +109,7 @@ void screen_currently_playing::draw(bitmap_image & img)
         {
             // Display monkey
             const size_t monkey_start_x {160};
-            const size_t monkey_start_y {15};
+            const size_t monkey_start_y {5};
             gimp_monkey_image m;
             std::cout << "monkey width = " << m.width() << std::endl;
             std::cout << "monkey height = " << m.height() << std::endl;
