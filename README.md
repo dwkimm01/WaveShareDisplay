@@ -4,6 +4,7 @@ WaveShare 2.9" display for Judah's music box
 Started from [Waveshare](https://github.com/waveshare/e-Paper)
 
 TODO
+* Add version history
 * Use boost::di fork to wire together pieces
 * Consider extracting widgets from screen_XXX which are just examples
 * Play/Play-Next on sbpd or just replace sbpd
