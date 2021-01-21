@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Server: Logitech Media Server (7.9.3 - 1597753178)
+Content-Length: 388
+Content-Type: application/json
+X-Time-To-Serve: 0.018657922744751
+
+{"id":1,"method":"slim.request","result":{"digital_volume_control":1,"player_name":"Sonos-48A6B843265E","player_connected":1,"playlist mode":"off","mode":"stop","playlist repeat":0,"signalstrength":0,"player_ip":"192.168.31.210:35692","playlist_tracks":0,"mixer volume":50,"playlist shuffle":0,"power":1,"seq_no":0},"params":["192.168.31.210",["status","-",1,"tags:gABbehldiqtyrSuoKLN"]]}HTTP/1.1 200 OK
+Server: Logitech Media Server (7.9.3 - 1597753178)
+Content-Length: 407
+Content-Type: application/json
+X-Time-To-Serve: 0.0433130264282227
+
+{"id":1,"params":["",["serverstatus"]],"result":{"uuid":"98a4c177-d672-431b-a76c-011505f0b7a0","ip":"192.168.31.210","httpport":"9000","info total songs":2,"player count":6,"sn player count":0,"version":"7.9.3","other player count":0,"info total albums":1,"info total genres":1,"mac":"B8:27:EB:A9:7F:83","info total duration":7438.628,"info total artists":1,"lastscan":"1610587112"},"method":"slim.request"}HTTP/1.1 200 OK
+Server: Logitech Media Server (7.9.3 - 1597753178)
+Content-Length: 2105
+Content-Type: application/json
+X-Time-To-Serve: 0.0440089702606201
+
+{"id":1,"params":["",["serverstatus","0","999"]],"method":"slim.request","result":{"sn player count":0,"version":"7.9.3","player count":6,"mac":"B8:27:EB:A9:7F:83","other player count":0,"info total albums":1,"info total genres":1,"info total artists":1,"info total duration":7438.628,"lastscan":"1610587112","players_loop":[{"playerindex":"0","firmware":0,"canpoweroff":1,"isplaying":0,"playerid":"aa:aa:2b:b3:00:77","uuid":null,"connected":1,"ip":"192.168.31.210:35692","model":"squeezelite","isplayer":1,"modelname":"RaopBridge","displaytype":"none","name":"Sonos-48A6B843265E","seq_no":0,"power":1},{"playerid":"b8:27:eb:a9:7f:83","isplaying":1,"canpoweroff":1,"firmware":"v1.9.6-1206-pCP","playerindex":1,"model":"squeezelite","ip":"192.168.31.210:50628","connected":1,"uuid":null,"modelname":"SqueezeLite","displaytype":"none","isplayer":1,"power":1,"name":"piCorePlayer","seq_no":0},{"playerindex":2,"firmware":0,"canpoweroff":1,"isplaying":0,"playerid":"aa:aa:c4:78:3e:5b","uuid":null,"connected":1,"ip":"192.168.31.210:35698","model":"squeezelite","isplayer":1,"displaytype":"none","modelname":"RaopBridge","name":"Entertainment-Room","seq_no":0,"power":1},{"uuid":null,"connected":1,"ip":"192.168.31.210:35862","model":"squeezelite","playerindex":3,"firmware":0,"canpoweroff":1,"playerid":"aa:aa:14:dc:7a:68","isplaying":0,"name":"Sonos-5CAAFDD30F8C","seq_no":0,"power":1,"displaytype":"none","modelname":"RaopBridge","isplayer":1},{"isplayer":1,"displaytype":"none","modelname":"RaopBridge","power":1,"seq_no":0,"name":"Sonos-48A6B8198F0E","canpoweroff":1,"isplaying":0,"playerid":"aa:aa:be:c2:90:d5","playerindex":4,"firmware":0,"ip":"192.168.31.210:35848","model":"squeezelite","connected":1,"uuid":null},{"name":"Living-Room-Apple-TV","seq_no":0,"power":1,"isplayer":1,"displaytype":"none","modelname":"RaopBridge","uuid":null,"connected":1,"model":"squeezelite","ip":"192.168.31.210:35696","firmware":0,"playerindex":5,"isplaying":0,"playerid":"aa:aa:96:08:23:43","canpoweroff":1}],"uuid":"98a4c177-d672-431b-a76c-011505f0b7a0","httpport":"9000","ip":"192.168.31.210","info total songs":2}}
