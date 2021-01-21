@@ -63,12 +63,12 @@ bitmap_display_2in9::~bitmap_display_2in9()
 
 size_t bitmap_display_2in9::width_pixels() const
 {
-    return EPD_2IN9_WIDTH;
+    return EPD_2IN9_WIDTH; // 128
 }
 
 size_t bitmap_display_2in9::height_pixels() const
 {
-    return EPD_2IN9_HEIGHT;
+    return EPD_2IN9_HEIGHT; // 296
 }
 
 void bitmap_display_2in9::clear()

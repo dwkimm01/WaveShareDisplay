@@ -88,6 +88,8 @@ add_executable(wseink_cpp
         cpp/drawing.cpp
         cpp/drawing.h
 
+        cpp/impl/screens/gimp_monkey_image.cpp
+        cpp/impl/screens/gimp_monkey_image.h
         cpp/impl/screens/screen_bender.cpp
         cpp/impl/screens/screen_bender.h
         cpp/impl/screens/screen_circle.cpp

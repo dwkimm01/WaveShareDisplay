@@ -5,6 +5,7 @@
 #include <iostream>
 #include "screen_currently_playing.h"
 #include "drawing.h"
+#include "gimp_monkey_image.h"
 
 namespace waveshare_eink_cpp
 {
@@ -98,10 +99,35 @@ void screen_currently_playing::draw(bitmap_image & img)
                 );
         }
 
-        // Move clock to correct position
-        m_widget_current_time->x() = img.image_width_pixels() - 40;
-        m_widget_current_time->y() = img.image_height_pixels() - 15;
-        m_widget_current_time->draw(img);
+        {
+            // Move clock to correct position
+            m_widget_current_time->x() = img.image_width_pixels() - 40;
+            m_widget_current_time->y() = img.image_height_pixels() - 15;
+            m_widget_current_time->draw(img);
+        }
+
+        {
+            // Display monkey
+            const size_t monkey_start_x {160};
+            const size_t monkey_start_y {15};
+            gimp_monkey_image m;
+            std::cout << "monkey width = " << m.width() << std::endl;
+            std::cout << "monkey height = " << m.height() << std::endl;
+            for(int y = 0; y < m.height(); ++y)
+            {
+                for(int x = 0; x < m.width(); ++x)
+                {
+                    const int img_val = (int) m.pixel_at(x, y);
+                    const int pixel_val = (img_val == 0)?(0):(255);
+//                    if(val == 0)
+//                        std::cout << " ";
+//                    else
+//                        std::cout << "*";
+                    img.set(x + monkey_start_x, y + monkey_start_y, pixel_val); // black
+                }
+                std::cout << std::endl;
+            }
+        }
     }
 
 }
