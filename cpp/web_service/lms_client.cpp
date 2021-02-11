@@ -12,11 +12,11 @@
 namespace waveshare_eink_cpp
 {
 
-lms_client::lms_client()
+lms_client::lms_client(const std::string & url)
+    : m_url(url)
 {
     // This assumes that drogon::app().run(); is called somewhere else
 }
-
 
 void lms_client::play()
 {
@@ -24,7 +24,7 @@ void lms_client::play()
     using namespace drogon;
 
     // Move this to reuse it
-    auto client = HttpClient::newHttpClient("http://192.168.31.210:9000");
+    auto client = HttpClient::newHttpClient(m_url);
 
     // From working curl script - that started here: https://forums.slimdevices.com/showthread.php?43880-any-javascript-json-squeezecenter-examples
     //  curl -i -X POST -H 'Content-Type: application/json' -d \
@@ -82,7 +82,7 @@ void lms_client::pause()
     using namespace drogon;
 
     // Move this to reuse it
-    auto client = HttpClient::newHttpClient("http://192.168.31.210:9000");
+    auto client = HttpClient::newHttpClient(m_url);
 
     // From working curl script - that started here: https://forums.slimdevices.com/showthread.php?43880-any-javascript-json-squeezecenter-examples
     //  curl -i -X POST -H 'Content-Type: application/json' -d \
@@ -140,7 +140,7 @@ std::string lms_client::currently_playing()
     using namespace drogon;
 
     // Move this to reuse it
-    auto client = HttpClient::newHttpClient("http://192.168.31.210:9000");
+    auto client = HttpClient::newHttpClient(m_url);
 
     // From working curl script - that started here: https://forums.slimdevices.com/showthread.php?43880-any-javascript-json-squeezecenter-examples
     //  curl -i -X POST -H 'Content-Type: application/json' -d \
