@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 
     // Add server endpoints
     waveshare_web_service s(screen_manager_ptr);
-    std::shared_ptr<lms_client> lms_client;
+    std::shared_ptr<lms_client> lms_client = std::make_shared<waveshare_eink_cpp::lms_client>();
 
     screen_manager_ptr->add_screen("currently_playing", std::shared_ptr<i_screen>(new screen_currently_playing(lms_client)));
     screen_manager_ptr->set_screen("currently_playing");

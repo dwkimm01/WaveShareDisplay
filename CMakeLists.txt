@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.3)
 #project(wseink_cpp CXX)
 project(wseink_cpp)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 if(UNIX AND NOT APPLE)
     set(LINUX TRUE)
