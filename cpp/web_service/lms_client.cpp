@@ -12,8 +12,11 @@
 namespace waveshare_eink_cpp
 {
 
-lms_client::lms_client(const std::string & url)
-    : m_url(url)
+lms_client::lms_client
+    ( const std::string & url
+    , const std::string & player_name
+    ) : m_url(url)
+      , m_player_name(player_name)
 {
     // This assumes that drogon::app().run(); is called somewhere else
 }
@@ -35,7 +38,7 @@ void lms_client::play()
     tags.append("play");
 
     Json::Value tags_array;
-    tags_array.append("piCorePlayer");
+    tags_array.append(m_player_name);
     tags_array.append(tags);
 
     Json::Value params;
@@ -50,7 +53,6 @@ void lms_client::play()
     req->setPath("/jsonrpc.js");
 
     std::cout << "req(" << req->getBody() << ")" << std::endl;
-
 
     client->sendRequest(
             req,
@@ -96,7 +98,7 @@ void lms_client::pause()
 //    tags.append("tags:al");
 
     Json::Value tags_array;
-    tags_array.append("piCorePlayer");
+    tags_array.append(m_player_name);
     tags_array.append(tags);
 
     Json::Value params;
@@ -157,7 +159,7 @@ std::string lms_client::currently_playing()
     tags.append("tags:gABbehldiqtyrSuoKLN");
 
     Json::Value tags_array;
-    tags_array.append("piCorePlayer");
+    tags_array.append(m_player_name);
     tags_array.append(tags);
 
     Json::Value params;
@@ -187,7 +189,6 @@ std::string lms_client::currently_playing()
                         std::cerr << "Response is somehow null\n";
                         return;
                     }
-
 
 //                    std::cout << "rep<<<" << response->getBody() << ">>>" << std::endl;
 
@@ -252,5 +253,4 @@ Notes
 //            std::cout << "error" << std::endl;
 //        }
 //    }
-
 #endif

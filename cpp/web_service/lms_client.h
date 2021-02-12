@@ -10,7 +10,10 @@ namespace waveshare_eink_cpp
 
 class lms_client {
 public:
-    lms_client(const std::string & url = "http://localhost:9000");
+    lms_client
+        ( const std::string & url = "http://localhost:9000"
+        , const std::string & player_name = "jmba"
+        );
 
     void play();
 
@@ -20,6 +23,7 @@ public:
 
 private:
     std::string m_url;
+    std::string m_player_name;
 };
 
 }
