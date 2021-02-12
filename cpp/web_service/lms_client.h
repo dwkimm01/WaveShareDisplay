@@ -11,7 +11,7 @@ namespace waveshare_eink_cpp
 class lms_client {
 public:
     lms_client
-        ( const std::string & url = "http://localhost:9000"
+        ( const std::string & url = "http://jmb:9000"
         , const std::string & player_name = "jmba"
         );
 
