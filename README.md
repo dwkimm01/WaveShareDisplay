@@ -1,21 +1,16 @@
 # WaveShareDisplay
 WaveShare 2.9" display for Judah's music box
 
-Started from [Waveshare](https://github.com/waveshare/e-Paper)
-
 TODO
 * Add version history
 * Use boost::di fork to wire together pieces
 * Consider extracting widgets from screen_XXX which are just examples
-* Play/Play-Next on sbpd or just replace sbpd
 * Set LMS volume - to remove sbpd need
-* Get LMS volume - to remove sbpd need
+* Get LMS volume - to display on eink
 * Read rotary encoder and button - to remove sbpd need
 * Add picture display functionality
 * Fix Display robot teeth
 * Make LMS default play only locally
-* Compare drogon app vs boost::asio::beast
-  * Or what about belle octobanan
 * Partial update of a windowed area
 * Image of wave
   * [Floyd-Steinberg Dither](https://en.wikipedia.org/wiki/Floyd–Steinberg_dithering)
@@ -26,6 +21,7 @@ TODO
 * [Improved e-ink update](https://www.instructables.com/Waveshare-EPaper-and-a-RaspberryPi/)
 
 DONE
+* Make host_url and player_name command line configurable
 * Clear window to all white initially
 * Set currently playing as default screen at startup
 * Only send update to display if there are changes
@@ -40,9 +36,12 @@ DONE
 * Get LMS currently playing
 * Display robot teeth
 * Add monkey [SVG](https://github.com/sammycage/lunasvg) (did bmp monkey instead)
-  
+* Could compare drogon app vs boost::asio::beast - but this seems to work well enough
+  * Or what about belle octobanan  
+
 Links
 * WaveShare
    * [Dither](https://www.waveshare.com/wiki/E-Paper_Floyd-Steinberg)
    * [Products](https://www.waveshare.com/product/displays/e-paper/epaper-2/2.9inch-e-paper-module.htm)
+   * [Waveshare](https://github.com/waveshare/e-Paper) is a starting point for eink code
    

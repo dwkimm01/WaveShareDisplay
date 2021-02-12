@@ -2,17 +2,14 @@
 // Created by Kimmel, David on 12/2/20.
 //
 
-#include <iostream>
-#include <thread>
-#include <chrono>
-
 #include <signal.h>
-
+#include <iostream>
+#include <chrono>
 
 #include "bitmap_display_2in9.h"
 #include "bitmap_display_2in9_null.h"
-#include "drawing.h"
-#include "../c/lib/Fonts/fonts.h"
+#include "active_timer.h"
+
 #include "web_service/waveshare_web_service.h"
 #include "web_service/lms_client.h"
 #include "web_service/web_service.h"
@@ -23,20 +20,33 @@
 #include "impl/screens/screen_currently_playing.h"
 #include "impl/screens/screen_diamond.h"
 #include "impl/screens/screen_square.h"
-#include "impl/screens/screen_widgets.h"
 #include "impl/screens/screen_x.h"
 
-#include "impl/bitmaps.h"
-#include "impl/widget_bitmap.h"
-#include "impl/widget_string.h"
-
-#include "active_timer.h"
 
 int main(int argc, char* argv[])
 {
     using namespace std;
     using namespace waveshare_eink_cpp;
     cout << "Starting...\n";
+
+    std::string host_url = "http://jmb:9000";
+    std::string player_name = "jmba";
+
+    if(argc < 3)
+    {
+        cout << "usage: host_url player_name\n";
+        cout << " e.g.: " << host_url << " " << player_name;
+        cout << endl;
+        return 2;
+    }
+    else
+    {
+        host_url = argv[1];
+        player_name = argv[2];
+    }
+
+    cout << "host_url [" << host_url << "]" << endl;
+    cout << "player_name [" << player_name << "]" << endl;
 
     // Exception handling:ctrl + c
     signal(SIGINT, bitmap_display_2in9::exit_handler);
@@ -77,7 +87,11 @@ int main(int argc, char* argv[])
 
     // Add server endpoints
     waveshare_web_service s(screen_manager_ptr);
-    std::shared_ptr<lms_client> lms_client = std::make_shared<waveshare_eink_cpp::lms_client>();
+    std::shared_ptr<lms_client> lms_client
+        = std::make_shared<waveshare_eink_cpp::lms_client>
+            ( host_url
+            , player_name
+            );
 
     screen_manager_ptr->add_screen("currently_playing", std::shared_ptr<i_screen>(new screen_currently_playing(lms_client)));
     screen_manager_ptr->set_screen("currently_playing");
